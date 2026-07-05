@@ -1,0 +1,16 @@
+{
+  "name": "robox-creative-ai",
+  "version": "2.0.0",
+  "description": "ROBOX Creative AI",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Luis A. Cabral",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "puppeteer": "^25.2.1"
+  }
+}

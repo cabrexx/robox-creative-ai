@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROBOX CREATIVE AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef3f8;color:#111827}
+header{background:#111827;color:white;padding:26px 40px}
+.container{max-width:1200px;margin:35px auto;padding:0 20px}
+.card{background:white;border-radius:22px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.grid{display:grid;grid-template-columns:420px 1fr;gap:28px}
+label{font-weight:bold;margin-top:14px;display:block}
+input{width:100%;padding:14px;margin-top:8px;border:1px solid #cbd5e1;border-radius:10px;font-size:16px}
+button{width:100%;margin-top:20px;padding:16px;background:#2563eb;color:white;border:none;border-radius:12px;font-size:17px;font-weight:bold;cursor:pointer}
+.preview{background:#f8fafc;border:1px solid #e5e7eb;border-radius:18px;padding:24px;min-height:520px}
+.preview img{width:100%;max-width:600px;border-radius:16px;border:1px solid #ddd;margin-top:15px}
+.success{color:#059669;font-weight:bold}
+.error{color:#dc2626;font-weight:bold}
+.loading{color:#2563eb;font-weight:bold}
+.actions{display:flex;gap:12px;margin-top:15px;flex-wrap:wrap}
+.actions a{background:#e0ecff;padding:10px 14px;border-radius:10px;text-decoration:none;color:#2563eb;font-weight:bold}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>🎨 ROBOX CREATIVE AI STUDIO</h1>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2>Gerador de Campanhas</h2>
+
+    <div class="grid">
+      <div>
+        <label>Headline</label>
+        <input id="headline" value="PROMOÇÃO ESPECIAL">
+
+        <label>Produto</label>
+        <input id="produto" value="CAMISETA BÁSICA">
+
+        <label>Preço</label>
+        <input id="preco" value="R$ 49,90">
+
+        <label>Estoque</label>
+        <input id="estoque" value="30">
+
+        <label>Prioridade</label>
+        <input id="prioridade" value="ALTA">
+
+        <label>Ação</label>
+        <input id="acao" value="Anunciar no WhatsApp">
+
+        <label>Score Robox</label>
+        <input id="score" value="92">
+
+        <label>Imagem do Produto</label>
+        <input id="imagem" value="" placeholder="Cole aqui a URL pública da imagem">
+
+        <button type="button" onclick="gerarCampanha()">🚀 GERAR CAMPANHA</button>
+      </div>
+
+      <div class="preview">
+        <h3>Prévia da Campanha</h3>
+        <div id="resultado">
+          <p>A imagem gerada aparecerá aqui.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function carregarParametros(){
+  const params = new URLSearchParams(window.location.search);
+  const campos = ["headline","produto","preco","estoque","prioridade","acao","score","imagem"];
+
+  campos.forEach(function(campo){
+    if(params.get(campo) !== null){
+      document.getElementById(campo).value = params.get(campo) || "";
+    }
+  });
+}
+
+async function gerarCampanha(){
+  const resultado = document.getElementById("resultado");
+
+  const dados = {
+    headline: document.getElementById("headline").value,
+    produto: document.getElementById("produto").value,
+    preco: document.getElementById("preco").value,
+    estoque_atual: document.getElementById("estoque").value,
+    prioridade: document.getElementById("prioridade").value,
+    acao: document.getElementById("acao").value,
+    score: document.getElementById("score").value,
+    imagem: document.getElementById("imagem").value,
+    cta: "CHAME NO WHATSAPP"
+  };
+
+  resultado.innerHTML = '<p class="loading">⏳ Gerando campanha...</p>';
+
+  try{
+    const resposta = await fetch("/api/render/banner", {
+      method: "POST",
+      headers: {"Content-Type":"application/json; charset=utf-8"},
+      body: JSON.stringify(dados)
+    });
+
+    const json = await resposta.json();
+
+    if(json.success){
+      const url = json.imageUrl + "?t=" + Date.now();
+
+      resultado.innerHTML =
+        '<p class="success">✅ Campanha gerada com sucesso!</p>' +
+        '<div class="actions">' +
+        '<a href="' + json.imageUrl + '" target="_blank">Abrir imagem</a>' +
+        '<a href="' + json.imageUrl + '" download>Baixar PNG</a>' +
+        '</div>' +
+        '<img src="' + url + '" alt="Campanha gerada">';
+    }else{
+      resultado.innerHTML = '<p class="error">Erro: ' + (json.error || "erro desconhecido") + '</p>';
+    }
+
+  }catch(erro){
+    resultado.innerHTML = '<p class="error">Erro de conexão: ' + erro.message + '</p>';
+  }
+}
+
+carregarParametros();
+</script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>ROBOX CREATIVE AI - Template Oferta</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  width:1080px;
+  height:1080px;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#0f172a;
+}
+
+.banner{
+  width:1080px;
+  height:1080px;
+  padding:56px;
+  background:linear-gradient(135deg,#111827 0%,#1e293b 45%,#0f172a 100%);
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+
+.badge{
+  display:inline-block;
+  background:#16a34a;
+  color:white;
+  padding:14px 24px;
+  border-radius:999px;
+  font-size:24px;
+  font-weight:900;
+}
+
+.brand{
+  position:absolute;
+  top:58px;
+  right:56px;
+  font-size:26px;
+  font-weight:900;
+  color:#38bdf8;
+}
+
+.main{
+  margin-top:70px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:45px;
+  align-items:center;
+}
+
+.product-box{
+  background:linear-gradient(160deg,#334155,#020617);
+  border-radius:34px;
+  height:470px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 30px 60px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.08);
+  padding:25px;
+}
+
+.product-image{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  border-radius:24px;
+}
+
+.product-placeholder{
+  width:270px;
+  height:270px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#64748b,#cbd5e1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:110px;
+}
+
+.content h1{
+  font-size:70px;
+  line-height:.95;
+  margin:0 0 25px;
+  text-transform:uppercase;
+}
+
+.subtitle{
+  font-size:34px;
+  color:#cbd5e1;
+  margin-bottom:28px;
+}
+
+.price-card{
+  background:#ef4444;
+  color:white;
+  padding:26px 32px;
+  border-radius:24px;
+  transform:rotate(-2deg);
+  box-shadow:0 22px 45px rgba(0,0,0,.3);
+  display:inline-block;
+}
+
+.price-label{
+  font-size:24px;
+  font-weight:700;
+}
+
+.price{
+  font-size:72px;
+  font-weight:900;
+  line-height:1;
+}
+
+.metrics{
+  margin-top:55px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.metric{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  padding:22px;
+}
+
+.metric .label{
+  font-size:22px;
+  color:#94a3b8;
+}
+
+.metric .value{
+  font-size:34px;
+  font-weight:900;
+  margin-top:8px;
+}
+
+.footer-note{
+  position:absolute;
+  right:70px;
+  bottom:140px;
+  font-size:24px;
+  color:#94a3b8;
+  font-weight:700;
+}
+
+.cta{
+  position:absolute;
+  left:56px;
+  right:56px;
+  bottom:58px;
+  background:#16a34a;
+  color:white;
+  border-radius:28px;
+  padding:28px;
+  text-align:center;
+  font-size:38px;
+  font-weight:900;
+}
+</style>
+</head>
+
+<body>
+<div class="banner">
+
+  <div class="badge">🤖 RECOMENDADO PELA IA</div>
+  <div class="brand">ROBOX CREATIVE AI</div>
+
+  <div class="main">
+
+    <div class="product-box">
+      {{produto_visual}}
+    </div>
+
+    <div class="content">
+      <h1>{{headline}}</h1>
+      <div class="subtitle">{{produto}}</div>
+
+      <div class="price-card">
+        <div class="price-label">POR APENAS</div>
+        <div class="price">{{preco}}</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="metrics">
+    <div class="metric">
+      <div class="label">Estoque</div>
+      <div class="value">{{estoque_atual}}</div>
+    </div>
+
+    <div class="metric">
+      <div class="label">Prioridade</div>
+      <div class="value">{{prioridade}}</div>
+    </div>
+
+    <div class="metric">
+      <div class="label">Score Robox</div>
+      <div class="value">{{score}}</div>
+    </div>
+  </div>
+
+  <div class="footer-note">{{acao}}</div>
+  <div class="cta">{{cta}}</div>
+
+</div>
+</body>
+</html>
