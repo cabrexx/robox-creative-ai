@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
   res.json({
     status: "ROBOX ONLINE",
     projeto: "ROBOX CREATIVE AI",
-    versao: "2.0"
+    versao: "2.1 Render"
   });
 });
 
@@ -56,9 +56,20 @@ app.post("/api/render/banner", async (req, res) => {
       .replaceAll("{{cta}}", escapeHtml(dados.cta || "CHAME NO WHATSAPP"))
       .replaceAll("{{produto_visual}}", produtoVisual);
 
-    browser = await puppeteer.launch({
-      headless: "new"
-    });
+    const launchOptions = {
+      headless: "new",
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage"
+      ]
+    };
+
+    if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+      launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+    }
+
+    browser = await puppeteer.launch(launchOptions);
 
     const page = await browser.newPage();
 
@@ -90,8 +101,20 @@ app.post("/api/render/banner", async (req, res) => {
 
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    const filename = `banner-${Date.now()}.png`;
-    const filepath = path.join(__dirname, "output", filename);
+    const outputDir = path.join(__dirname, "output");
+
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
+
+    const outputDir = path.join(__dirname, "output");
+
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir, { recursive: true });
+}
+
+const filename = `banner-${Date.now()}.png`;
+const filepath = path.join(outputDir, filename);
 
     await page.screenshot({
       path: filepath,
@@ -108,12 +131,14 @@ app.post("/api/render/banner", async (req, res) => {
 
     res.json({
       success: true,
-      imageUrl: `http://localhost:${PORT}/output/${filename}`,
+      imageUrl: `${req.protocol}://${req.get("host")}/output/${filename}`,
       file: filename
     });
 
   } catch (error) {
-    if (browser) await browser.close();
+    if (browser) {
+      await browser.close();
+    }
 
     console.error("ERRO AO GERAR BANNER:", error.message);
 
@@ -128,7 +153,7 @@ app.listen(PORT, () => {
   console.log("");
   console.log("======================================");
   console.log("🚀 ROBOX CREATIVE AI ONLINE");
-  console.log(`🌐 http://localhost:${PORT}`);
+  console.log(`🌐 Porta: ${PORT}`);
   console.log("======================================");
   console.log("");
 });
