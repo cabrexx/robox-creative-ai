@@ -112,15 +112,40 @@ async function gerarCampanha(){
     const json = await resposta.json();
 
     if(json.success){
-      const url = json.imageUrl + "?t=" + Date.now();
 
-      resultado.innerHTML =
-        '<p class="success">✅ Campanha gerada com sucesso!</p>' +
-        '<div class="actions">' +
-        '<a href="' + json.imageUrl + '" target="_blank">Abrir imagem</a>' +
-        '<a href="' + json.imageUrl + '" download>Baixar PNG</a>' +
-        '</div>' +
-        '<img src="' + url + '" alt="Campanha gerada">';
+    const imagem = json.imageBase64;
+
+    resultado.innerHTML =
+        `
+        <p class="success">
+            ✅ Campanha gerada com sucesso!
+        </p>
+
+        <div class="actions">
+
+            <a href="${imagem}"
+               target="_blank">
+
+               Abrir imagem
+
+            </a>
+
+            <a
+               href="${imagem}"
+               download="${json.file}">
+
+               Baixar PNG
+
+            </a>
+
+        </div>
+
+        <img
+            src="${imagem}"
+            alt="Campanha Gerada">
+
+        `;
+}
     }else{
       resultado.innerHTML = '<p class="error">Erro: ' + (json.error || "erro desconhecido") + '</p>';
     }

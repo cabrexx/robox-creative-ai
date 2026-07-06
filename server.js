@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json({ limit: "20mb" }));
 
-app.use("/output", express.static(path.join(__dirname, "output")));
 app.use(express.static(path.join(__dirname, "src", "public")));
 
 function escapeHtml(value) {
@@ -25,7 +24,7 @@ app.get("/", (req, res) => {
   res.json({
     status: "ROBOX ONLINE",
     projeto: "ROBOX CREATIVE AI",
-    versao: "2.1 Render"
+    versao: "2.2 Cloud"
   });
 });
 
@@ -34,7 +33,6 @@ app.post("/api/render/banner", async (req, res) => {
 
   try {
     const dados = req.body || {};
-    console.log("DADOS RECEBIDOS:", dados);
 
     const templatePath = path.join(__dirname, "templates", "whatsapp-01.html");
     let html = fs.readFileSync(templatePath, "utf8");
@@ -101,23 +99,7 @@ app.post("/api/render/banner", async (req, res) => {
 
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    const outputDir = path.join(__dirname, "output");
-
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
-    }
-
-    const outputDir = path.join(__dirname, "output");
-
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir, { recursive: true });
-}
-
-const filename = `banner-${Date.now()}.png`;
-const filepath = path.join(outputDir, filename);
-
-    await page.screenshot({
-      path: filepath,
+    const buffer = await page.screenshot({
       type: "png",
       clip: {
         x: 0,
@@ -129,16 +111,16 @@ const filepath = path.join(outputDir, filename);
 
     await browser.close();
 
+    const base64Image = buffer.toString("base64");
+
     res.json({
       success: true,
-      imageUrl: `${req.protocol}://${req.get("host")}/output/${filename}`,
-      file: filename
+      imageBase64: `data:image/png;base64,${base64Image}`,
+      file: `banner-${Date.now()}.png`
     });
 
   } catch (error) {
-    if (browser) {
-      await browser.close();
-    }
+    if (browser) await browser.close();
 
     console.error("ERRO AO GERAR BANNER:", error.message);
 
@@ -150,10 +132,6 @@ const filepath = path.join(outputDir, filename);
 });
 
 app.listen(PORT, () => {
-  console.log("");
-  console.log("======================================");
   console.log("🚀 ROBOX CREATIVE AI ONLINE");
   console.log(`🌐 Porta: ${PORT}`);
-  console.log("======================================");
-  console.log("");
 });
