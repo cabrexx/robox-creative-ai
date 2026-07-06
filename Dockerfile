@@ -1,9 +1,8 @@
 FROM node:20-slim
 
-# Instala dependências necessárias para o Chromium
 RUN apt-get update && apt-get install -y \
     chromium \
-    chromium-sandbox \
+    unzip \
     fonts-liberation \
     libasound2 \
     libatk-bridge2.0-0 \
@@ -27,11 +26,12 @@ WORKDIR /app
 
 COPY package*.json ./
 
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
 RUN npm install
 
 COPY . .
-
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
 EXPOSE 3000
 
