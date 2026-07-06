@@ -2,301 +2,177 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ROBOX CREATIVE AI</title>
 
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
 <style>
-
-body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#edf2f7;
-}
-
-header{
-    background:#0f172a;
-    color:white;
-    padding:20px 40px;
-}
-
-.container{
-    width:1200px;
-    max-width:95%;
-    margin:30px auto;
-}
-
-.card{
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:0 8px 25px rgba(0,0,0,.12);
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:420px 1fr;
-    gap:30px;
-}
-
-label{
-    display:block;
-    margin-top:12px;
-    font-weight:bold;
-}
-
-input{
-    width:100%;
-    padding:12px;
-    border-radius:10px;
-    border:1px solid #cbd5e1;
-    font-size:16px;
-}
-
-button{
-    width:100%;
-    margin-top:18px;
-    padding:15px;
-    border:none;
-    border-radius:12px;
-    background:#2563eb;
-    color:white;
-    font-size:17px;
-    cursor:pointer;
-}
-
-.preview{
-    border:1px solid #ddd;
-    border-radius:18px;
-    background:#fafafa;
-    padding:20px;
-}
-
-#banner{
-    width:100%;
-    max-width:700px;
-    background:white;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 0 20px rgba(0,0,0,.15);
-}
-
-.topo{
-
-    background:#0f172a;
-    color:white;
-    padding:20px;
-
-}
-
-.produto{
-
-    display:flex;
-    gap:20px;
-    padding:25px;
-
-}
-
-.produto img{
-
-    width:260px;
-    height:260px;
-    object-fit:cover;
-    border-radius:15px;
-    border:1px solid #ddd;
-
-}
-
-.info{
-
-    flex:1;
-
-}
-
-.preco{
-
-    color:#e11d48;
-    font-size:42px;
-    font-weight:bold;
-
-}
-
-.score{
-
-    display:inline-block;
-    background:#16a34a;
-    color:white;
-    padding:8px 14px;
-    border-radius:30px;
-    margin-top:10px;
-
-}
-
-.cta{
-
-    background:#22c55e;
-    color:white;
-    text-align:center;
-    font-size:24px;
-    padding:18px;
-
-}
-
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef3f8;color:#0f172a}
+header{background:#111827;color:white;padding:28px 38px}
+header h1{margin:0;font-size:28px}
+.container{max-width:1200px;margin:34px auto;padding:0 20px}
+.card{background:white;border-radius:24px;padding:28px;box-shadow:0 15px 40px rgba(15,23,42,.12)}
+.grid{display:grid;grid-template-columns:390px 1fr;gap:28px}
+label{display:block;font-weight:bold;margin-top:13px;font-size:14px}
+input{width:100%;padding:13px;margin-top:7px;border:1px solid #cbd5e1;border-radius:10px;font-size:15px}
+button{width:100%;margin-top:18px;padding:15px;border:none;border-radius:12px;background:#2563eb;color:white;font-weight:bold;font-size:15px;cursor:pointer}
+.btn-green{background:#16a34a}
+.preview{background:#f8fafc;border:1px solid #dbe3ef;border-radius:18px;padding:24px}
+.actions{display:flex;gap:12px;margin:14px 0 16px}
+.actions button{width:auto;margin:0;padding:10px 16px;font-size:14px}
+.success{color:#059669;font-weight:bold;margin:0 0 12px}
+.banner{width:100%;max-width:520px;aspect-ratio:1/1;background:#111827;border-radius:14px;padding:28px;color:white;position:relative;overflow:hidden}
+.banner-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.badge{background:#16a34a;color:white;padding:9px 16px;border-radius:999px;font-size:12px;font-weight:bold}
+.brand{color:#38bdf8;font-size:12px;font-weight:bold}
+.banner-content{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+.product-box{background:#1f2937;border-radius:16px;height:210px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.product-box img{width:100%;height:100%;object-fit:cover}
+.placeholder{font-size:50px}
+.offer h2{font-size:36px;line-height:34px;margin:0 0 10px}
+.offer .produto{font-size:16px;color:#cbd5e1;margin-bottom:15px}
+.price-box{background:#ef4444;border-radius:12px;padding:14px 18px;transform:rotate(-2deg)}
+.price-label{font-size:11px;font-weight:bold}
+.price{font-size:34px;font-weight:900}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
+.metric{background:#263244;border-radius:9px;padding:10px}
+.metric span{display:block;color:#94a3b8;font-size:11px}
+.metric b{font-size:15px}
+.cta{position:absolute;left:28px;right:28px;bottom:24px;background:#16a34a;color:white;text-align:center;padding:16px;border-radius:12px;font-weight:900;font-size:18px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.banner{max-width:100%}}
 </style>
-
 </head>
 
 <body>
 
 <header>
-
-<h1>🎨 ROBOX CREATIVE AI STUDIO</h1>
-
+  <h1>🎨 ROBOX CREATIVE AI STUDIO</h1>
 </header>
 
 <div class="container">
+  <div class="card">
+    <div class="grid">
 
-<div class="card">
+      <div>
+        <h2>Gerador de Campanhas</h2>
 
-<div class="grid">
+        <label>Headline</label>
+        <input id="headline" value="PROMOÇÃO ESPECIAL">
 
-<div>
+        <label>Produto</label>
+        <input id="produto" value="CAMISETA BÁSICA">
 
-<label>Headline</label>
-<input id="headline">
+        <label>Preço</label>
+        <input id="preco" value="R$ 49,90">
 
-<label>Produto</label>
-<input id="produto">
+        <label>Estoque</label>
+        <input id="estoque" value="30">
 
-<label>Preço</label>
-<input id="preco">
+        <label>Prioridade</label>
+        <input id="prioridade" value="ALTA">
 
-<label>Estoque</label>
-<input id="estoque">
+        <label>Ação</label>
+        <input id="acao" value="Anunciar no WhatsApp">
 
-<label>Score</label>
-<input id="score">
+        <label>Score Robox</label>
+        <input id="score" value="92">
 
-<label>Imagem</label>
-<input id="imagem">
+        <label>Imagem do Produto</label>
+        <input id="imagem" placeholder="URL pública da imagem">
 
-<button onclick="atualizarBanner()">
+        <button onclick="atualizarBanner()">🚀 GERAR CAMPANHA</button>
+        <button class="btn-green" onclick="baixarBanner()">⬇️ BAIXAR PNG</button>
+      </div>
 
-ATUALIZAR BANNER
+      <div class="preview">
+        <h3>Prévia da Campanha</h3>
+        <p class="success">✅ Campanha pronta para visualização</p>
 
-</button>
+        <div id="banner" class="banner">
+          <div class="banner-top">
+            <div class="badge">🤖 RECOMENDADO PELA IA</div>
+            <div class="brand">ROBOX CREATIVE AI</div>
+          </div>
 
-</div>
+          <div class="banner-content">
+            <div class="product-box" id="boxImagem">
+              <div class="placeholder">👕</div>
+            </div>
 
-<div class="preview">
+            <div class="offer">
+              <h2 id="b_headline">PROMOÇÃO<br>ESPECIAL</h2>
+              <div class="produto" id="b_produto">CAMISETA BÁSICA</div>
 
-<div id="banner">
+              <div class="price-box">
+                <div class="price-label">POR APENAS</div>
+                <div class="price" id="b_preco">R$ 49,90</div>
+              </div>
+            </div>
+          </div>
 
-<div class="topo">
+          <div class="metrics">
+            <div class="metric"><span>Estoque</span><b id="b_estoque">30</b></div>
+            <div class="metric"><span>Prioridade</span><b id="b_prioridade">ALTA</b></div>
+            <div class="metric"><span>Score Robox</span><b id="b_score">92</b></div>
+          </div>
 
-<h2 id="b_headline"></h2>
+          <div class="cta" id="b_cta">CHAME NO WHATSAPP</div>
+        </div>
+      </div>
 
-</div>
-
-<div class="produto">
-
-<img id="b_imagem">
-
-<div class="info">
-
-<h2 id="b_produto"></h2>
-
-<div class="preco" id="b_preco"></div>
-
-<p>
-
-Estoque:
-<b id="b_estoque"></b>
-
-</p>
-
-<div class="score">
-
-Score Robox:
-<span id="b_score"></span>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="cta">
-
-CHAME NO WHATSAPP
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+    </div>
+  </div>
 </div>
 
 <script>
-
 function carregarParametros(){
+  const params = new URLSearchParams(window.location.search);
+  const campos = ["headline","produto","preco","estoque","prioridade","acao","score","imagem"];
 
-const p=new URLSearchParams(location.search);
+  campos.forEach(campo=>{
+    const valor = params.get(campo);
+    if(valor !== null){
+      document.getElementById(campo).value = valor;
+    }
+  });
 
-["headline","produto","preco","estoque","score","imagem"].forEach(c=>{
-
-document.getElementById(c).value=p.get(c)||"";
-
-});
-
-atualizarBanner();
-<button onclick="baixarBanner()" style="background:#16a34a;">
-  ⬇️ BAIXAR PNG
-</button>
-}<button
-    onclick="baixarBanner()"
-    style="background:#16a34a;">
-
-⬇️ BAIXAR PNG
-
-</button>
+  atualizarBanner();
+}
 
 function atualizarBanner(){
+  const headline = document.getElementById("headline").value || "PROMOÇÃO ESPECIAL";
+  const produto = document.getElementById("produto").value || "Produto";
+  const preco = document.getElementById("preco").value || "R$ 0,00";
+  const estoque = document.getElementById("estoque").value || "0";
+  const prioridade = document.getElementById("prioridade").value || "NORMAL";
+  const score = document.getElementById("score").value || "0";
+  const imagem = document.getElementById("imagem").value || "";
 
-document.getElementById("b_headline").innerText=document.getElementById("headline").value;
+  document.getElementById("b_headline").innerHTML = headline.replace(" ", "<br>");
+  document.getElementById("b_produto").innerText = produto;
+  document.getElementById("b_preco").innerText = preco;
+  document.getElementById("b_estoque").innerText = estoque;
+  document.getElementById("b_prioridade").innerText = prioridade;
+  document.getElementById("b_score").innerText = score;
 
-document.getElementById("b_produto").innerText=document.getElementById("produto").value;
+  const box = document.getElementById("boxImagem");
 
-document.getElementById("b_preco").innerText=document.getElementById("preco").value;
-
-document.getElementById("b_estoque").innerText=document.getElementById("estoque").value;
-
-document.getElementById("b_score").innerText=document.getElementById("score").value;
-
-const img=document.getElementById("imagem").value;
-
-if(img){
-
-document.getElementById("b_imagem").src=img;
-
-}else{
-
-document.getElementById("b_imagem").src="https://placehold.co/400x400?text=Produto";
-
+  if(imagem){
+    box.innerHTML = '<img src="' + imagem + '" crossorigin="anonymous" onerror="this.parentElement.innerHTML=\'<div class=placeholder>👕</div>\'">';
+  }else{
+    box.innerHTML = '<div class="placeholder">👕</div>';
+  }
 }
 
-}
 async function baixarBanner(){
   const banner = document.getElementById("banner");
 
-  const canvas = await html2canvas(banner, {
-    backgroundColor: "#ffffff",
-    scale: 2,
-    useCORS: true
+  const canvas = await html2canvas(banner,{
+    scale:2,
+    useCORS:true,
+    backgroundColor:null
   });
 
   const link = document.createElement("a");
@@ -305,14 +181,8 @@ async function baixarBanner(){
   link.click();
 }
 
-/* FIM DA FUNÇÃO */
-
 carregarParametros();
-
 </script>
-carregarParametros();
 
-</script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </body>
 </html>
