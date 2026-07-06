@@ -58,7 +58,7 @@ button{width:100%;margin-top:20px;padding:16px;background:#2563eb;color:white;bo
         <input id="score" value="92">
 
         <label>Imagem do Produto</label>
-        <input id="imagem" value="" placeholder="Cole aqui a URL pública da imagem">
+        <input id="imagem" placeholder="Cole aqui a URL pública da imagem">
 
         <button type="button" onclick="gerarCampanha()">🚀 GERAR CAMPANHA</button>
       </div>
@@ -85,7 +85,7 @@ function carregarParametros(){
   });
 }
 
-async function gerarCampanha() {
+async function gerarCampanha(){
   const resultado = document.getElementById("resultado");
 
   const dados = {
@@ -102,16 +102,16 @@ async function gerarCampanha() {
 
   resultado.innerHTML = '<p class="loading">⏳ Gerando campanha...</p>';
 
-  try {
+  try{
     const resposta = await fetch("/api/render/banner", {
       method: "POST",
-      headers: { "Content-Type": "application/json; charset=utf-8" },
+      headers: {"Content-Type":"application/json; charset=utf-8"},
       body: JSON.stringify(dados)
     });
 
     const json = await resposta.json();
 
-    if (json.success) {
+    if(json.success){
       const imagem = json.imageBase64;
 
       resultado.innerHTML =
@@ -125,62 +125,7 @@ async function gerarCampanha() {
       resultado.innerHTML = '<p class="error">Erro: ' + (json.error || "erro desconhecido") + '</p>';
     }
 
-  } catch (erro) {
-    resultado.innerHTML = '<p class="error">Erro de conexão: ' + erro.message + '</p>';
-  }
-}
-
-  resultado.innerHTML = '<p class="loading">⏳ Gerando campanha...</p>';
-
-  try{
-    const resposta = await fetch("/api/render/banner", {
-      method: "POST",
-      headers: {"Content-Type":"application/json; charset=utf-8"},
-      body: JSON.stringify(dados)
-    });
-
-    const json = await resposta.json();
-
-    if(json.success){
-
-    const imagem = json.imageBase64;
-
-    resultado.innerHTML =
-        `
-        <p class="success">
-            ✅ Campanha gerada com sucesso!
-        </p>
-
-        <div class="actions">
-
-            <a href="${imagem}"
-               target="_blank">
-
-               Abrir imagem
-
-            </a>
-
-            <a
-               href="${imagem}"
-               download="${json.file}">
-
-               Baixar PNG
-
-            </a>
-
-        </div>
-
-        <img
-            src="${imagem}"
-            alt="Campanha Gerada">
-
-        `;
-}
-    }else{
-      resultado.innerHTML = '<p class="error">Erro: ' + (json.error || "erro desconhecido") + '</p>';
-    }
-
-  }catch(erro){
+  } catch(erro){
     resultado.innerHTML = '<p class="error">Erro de conexão: ' + erro.message + '</p>';
   }
 }
