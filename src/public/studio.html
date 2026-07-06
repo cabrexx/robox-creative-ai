@@ -160,12 +160,10 @@ function atualizarBanner(){
   const box = document.getElementById("boxImagem");
 
   if(imagem){
-    box.innerHTML = '<img src="' + imagem + '" crossorigin="anonymous" onerror="this.parentElement.innerHTML=\'<div class=placeholder>👕</div>\'">';
-  }else{
-    box.innerHTML = '<div class="placeholder">👕</div>';
-  }
+  box.innerHTML = '<img src="' + imagem + '" onerror="this.parentElement.innerHTML=\'<div class=placeholder>👕</div>\'">';
+}else{
+  box.innerHTML = '<div class="placeholder">👕</div>';
 }
-
 async function baixarBanner(){
   const banner = document.getElementById("banner");
 
