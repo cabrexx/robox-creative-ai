@@ -85,7 +85,7 @@ function carregarParametros(){
   });
 }
 
-async function gerarCampanha(){
+async function gerarCampanha() {
   const resultado = document.getElementById("resultado");
 
   const dados = {
@@ -99,6 +99,36 @@ async function gerarCampanha(){
     imagem: document.getElementById("imagem").value,
     cta: "CHAME NO WHATSAPP"
   };
+
+  resultado.innerHTML = '<p class="loading">⏳ Gerando campanha...</p>';
+
+  try {
+    const resposta = await fetch("/api/render/banner", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify(dados)
+    });
+
+    const json = await resposta.json();
+
+    if (json.success) {
+      const imagem = json.imageBase64;
+
+      resultado.innerHTML =
+        '<p class="success">✅ Campanha gerada com sucesso!</p>' +
+        '<div class="actions">' +
+        '<a href="' + imagem + '" target="_blank">Abrir imagem</a>' +
+        '<a href="' + imagem + '" download="' + (json.file || "campanha.png") + '">Baixar PNG</a>' +
+        '</div>' +
+        '<img src="' + imagem + '" alt="Campanha gerada">';
+    } else {
+      resultado.innerHTML = '<p class="error">Erro: ' + (json.error || "erro desconhecido") + '</p>';
+    }
+
+  } catch (erro) {
+    resultado.innerHTML = '<p class="error">Erro de conexão: ' + erro.message + '</p>';
+  }
+}
 
   resultado.innerHTML = '<p class="loading">⏳ Gerando campanha...</p>';
 
