@@ -69,33 +69,27 @@ app.post("/api/render/banner", async (req, res) => {
       .replaceAll("{{produto_visual}}", produtoVisual);
 
     const launchOptions = {
-      headless: "new",
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage"
-      ]
-    };
-
-    if (process.env.PUPPETEER_EXECUTABLE_PATH) {
-      launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
-    }
-
-    browser = await puppeteer.launch(launchOptions);
-
-    const page = await browser.newPage();
-
-    await page.setViewport({
-      width: 1080,
-      height: 1080,
-      deviceScaleFactor: 1
-    });
-
-    await page.setContent(html, {
-      waitUntil: "domcontentloaded",
-      timeout: 0
-    });
-
+  headless: "new",
+  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium",
+  userDataDir: "/tmp/puppeteer_profile",
+  args: [
+    "--no-sandbox",
+    "--disable-setuid-sandbox",
+    "--disable-dev-shm-usage",
+    "--disable-gpu",
+    "--disable-software-rasterizer",
+    "--disable-crash-reporter",
+    "--disable-crashpad",
+    "--no-zygote",
+    "--single-process",
+    "--disable-background-networking",
+    "--disable-default-apps",
+    "--disable-extensions",
+    "--disable-sync",
+    "--metrics-recording-only",
+    "--mute-audio"
+  ]
+};
     await page.evaluate(async () => {
       const imagens = Array.from(document.images);
 

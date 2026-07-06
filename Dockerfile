@@ -31,7 +31,9 @@ RUN npm install
 COPY . .
 
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
-
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+ENV XDG_CONFIG_HOME=/tmp/.chromium
+ENV XDG_CACHE_HOME=/tmp/.chromium
 EXPOSE 3000
 
 CMD ["npm", "start"]
