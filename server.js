@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
   res.json({
     status: "ROBOX ONLINE",
     projeto: "ROBOX CREATIVE AI",
-    versao: "2.3 Cloud Memory"
+    versao: "2.4 Cloud Memory"
   });
 });
 
@@ -39,7 +39,6 @@ app.post("/api/render/banner", async (req, res) => {
 
   try {
     const dados = req.body || {};
-
     const templatePath = path.join(__dirname, "templates", "whatsapp-01.html");
 
     if (!fs.existsSync(templatePath)) {
@@ -69,27 +68,43 @@ app.post("/api/render/banner", async (req, res) => {
       .replaceAll("{{produto_visual}}", produtoVisual);
 
     const launchOptions = {
-  headless: "new",
-  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium",
-  userDataDir: "/tmp/puppeteer_profile",
-  args: [
-    "--no-sandbox",
-    "--disable-setuid-sandbox",
-    "--disable-dev-shm-usage",
-    "--disable-gpu",
-    "--disable-software-rasterizer",
-    "--disable-crash-reporter",
-    "--disable-crashpad",
-    "--no-zygote",
-    "--single-process",
-    "--disable-background-networking",
-    "--disable-default-apps",
-    "--disable-extensions",
-    "--disable-sync",
-    "--metrics-recording-only",
-    "--mute-audio"
-  ]
-};
+      headless: "new",
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium",
+      userDataDir: `/tmp/puppeteer_profile_${Date.now()}`,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-gpu",
+        "--disable-software-rasterizer",
+        "--disable-crash-reporter",
+        "--disable-crashpad",
+        "--no-zygote",
+        "--single-process",
+        "--disable-background-networking",
+        "--disable-default-apps",
+        "--disable-extensions",
+        "--disable-sync",
+        "--metrics-recording-only",
+        "--mute-audio"
+      ]
+    };
+
+    browser = await puppeteer.launch(launchOptions);
+
+    const page = await browser.newPage();
+
+    await page.setViewport({
+      width: 1080,
+      height: 1080,
+      deviceScaleFactor: 1
+    });
+
+    await page.setContent(html, {
+      waitUntil: "domcontentloaded",
+      timeout: 0
+    });
+
     await page.evaluate(async () => {
       const imagens = Array.from(document.images);
 
