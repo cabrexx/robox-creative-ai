@@ -8,8 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(express.json({ limit: "20mb" }));
-
+app.use(express.json({ limit: "25mb" }));
 app.use(express.static(path.join(__dirname, "src", "public")));
 
 function escapeHtml(value) {
@@ -24,23 +23,38 @@ app.get("/", (req, res) => {
   res.json({
     status: "ROBOX ONLINE",
     projeto: "ROBOX CREATIVE AI",
-    versao: "2.2 Cloud"
+    versao: "2.3 Cloud Memory"
+  });
+});
+
+app.get("/health", (req, res) => {
+  res.json({
+    ok: true,
+    service: "robox-creative-ai"
   });
 });
 
 app.post("/api/render/banner", async (req, res) => {
-  let browser;
+  let browser = null;
 
   try {
     const dados = req.body || {};
 
     const templatePath = path.join(__dirname, "templates", "whatsapp-01.html");
+
+    if (!fs.existsSync(templatePath)) {
+      return res.status(500).json({
+        success: false,
+        error: "Template whatsapp-01.html não encontrado."
+      });
+    }
+
     let html = fs.readFileSync(templatePath, "utf8");
 
     const imagem = dados.imagem || "";
 
     const produtoVisual = imagem
-      ? `<img src="${escapeHtml(imagem)}" class="product-image">`
+      ? `<img src="${escapeHtml(imagem)}" class="product-image" crossorigin="anonymous">`
       : `<div class="product-placeholder">👕</div>`;
 
     html = html
@@ -97,7 +111,7 @@ app.post("/api/render/banner", async (req, res) => {
       );
     });
 
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
     const buffer = await page.screenshot({
       type: "png",
@@ -110,28 +124,35 @@ app.post("/api/render/banner", async (req, res) => {
     });
 
     await browser.close();
-
-    const base64Image = buffer.toString("base64");
+    browser = null;
 
     res.json({
       success: true,
-      imageBase64: `data:image/png;base64,${base64Image}`,
+      imageBase64: `data:image/png;base64,${buffer.toString("base64")}`,
       file: `banner-${Date.now()}.png`
     });
 
   } catch (error) {
-    if (browser) await browser.close();
+    if (browser) {
+      try {
+        await browser.close();
+      } catch (closeError) {
+        console.error("Erro ao fechar browser:", closeError.message);
+      }
+    }
 
-    console.error("ERRO AO GERAR BANNER:", error.message);
+    console.error("ERRO AO GERAR BANNER:", error);
 
     res.status(500).json({
       success: false,
-      error: error.message
+      error: error.message || "Erro desconhecido ao gerar banner."
     });
   }
 });
 
 app.listen(PORT, () => {
+  console.log("======================================");
   console.log("🚀 ROBOX CREATIVE AI ONLINE");
   console.log(`🌐 Porta: ${PORT}`);
+  console.log("======================================");
 });
