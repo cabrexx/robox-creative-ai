@@ -159,9 +159,15 @@ function atualizarBanner(){
 
   const box = document.getElementById("boxImagem");
 
-  if(imagem){
-  box.innerHTML = '<img src="' + imagem + '" onerror="this.parentElement.innerHTML=\'<div class=placeholder>👕</div>\'">';
-}else{
+  if (imagem) {
+  box.innerHTML = "";
+  const img = document.createElement("img");
+  img.src = imagem;
+  img.onerror = function () {
+    box.innerHTML = '<div class="placeholder">👕</div>';
+  };
+  box.appendChild(img);
+} else {
   box.innerHTML = '<div class="placeholder">👕</div>';
 }
 async function baixarBanner(){
