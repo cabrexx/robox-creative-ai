@@ -1,193 +1,1901 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
 <title>ROBOX CREATIVE AI</title>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef3f8;color:#0f172a}
-header{background:#111827;color:white;padding:28px 38px}
-header h1{margin:0;font-size:28px}
-.container{max-width:1200px;margin:34px auto;padding:0 20px}
-.card{background:white;border-radius:24px;padding:28px;box-shadow:0 15px 40px rgba(15,23,42,.12)}
-.grid{display:grid;grid-template-columns:390px 1fr;gap:28px}
-label{display:block;font-weight:bold;margin-top:13px;font-size:14px}
-input{width:100%;padding:13px;margin-top:7px;border:1px solid #cbd5e1;border-radius:10px;font-size:15px}
-button{width:100%;margin-top:18px;padding:15px;border:none;border-radius:12px;background:#2563eb;color:white;font-weight:bold;font-size:15px;cursor:pointer}
-.btn-green{background:#16a34a}
-.preview{background:#f8fafc;border:1px solid #dbe3ef;border-radius:18px;padding:24px}
-.actions{display:flex;gap:12px;margin:14px 0 16px}
-.actions button{width:auto;margin:0;padding:10px 16px;font-size:14px}
-.success{color:#059669;font-weight:bold;margin:0 0 12px}
-.banner{width:100%;max-width:520px;aspect-ratio:1/1;background:#111827;border-radius:14px;padding:28px;color:white;position:relative;overflow:hidden}
-.banner-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-.badge{background:#16a34a;color:white;padding:9px 16px;border-radius:999px;font-size:12px;font-weight:bold}
-.brand{color:#38bdf8;font-size:12px;font-weight:bold}
-.banner-content{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
-.product-box{background:#1f2937;border-radius:16px;height:210px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.product-box img{width:100%;height:100%;object-fit:cover}
-.placeholder{font-size:50px}
-.offer h2{font-size:36px;line-height:34px;margin:0 0 10px}
-.offer .produto{font-size:16px;color:#cbd5e1;margin-bottom:15px}
-.price-box{background:#ef4444;border-radius:12px;padding:14px 18px;transform:rotate(-2deg)}
-.price-label{font-size:11px;font-weight:bold}
-.price{font-size:34px;font-weight:900}
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
-.metric{background:#263244;border-radius:9px;padding:10px}
-.metric span{display:block;color:#94a3b8;font-size:11px}
-.metric b{font-size:15px}
-.cta{position:absolute;left:28px;right:28px;bottom:24px;background:#16a34a;color:white;text-align:center;padding:16px;border-radius:12px;font-weight:900;font-size:18px}
-@media(max-width:900px){.grid{grid-template-columns:1fr}.banner{max-width:100%}}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#eef3f8;
+  color:#0f172a;
+}
+
+header{
+  background:#111827;
+  color:white;
+  padding:24px 38px;
+}
+
+header h1{
+  margin:0;
+  font-size:28px;
+}
+
+header p{
+  margin:7px 0 0;
+  color:#94a3b8;
+  font-size:14px;
+}
+
+.container{
+  max-width:1280px;
+  margin:34px auto;
+  padding:0 20px;
+}
+
+.card{
+  background:white;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 15px 40px rgba(15,23,42,.12);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:390px 1fr;
+  gap:28px;
+}
+
+h2{
+  margin-top:0;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-top:13px;
+  font-size:14px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  margin-top:7px;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  font-size:15px;
+}
+
+button{
+  width:100%;
+  margin-top:14px;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:white;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.93;
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.btn-green{
+  background:#16a34a;
+}
+
+.btn-dark{
+  background:#111827;
+}
+
+.btn-gray{
+  background:#475569;
+}
+
+.btn-orange{
+  background:#ea580c;
+}
+
+.preview{
+  background:#f8fafc;
+  border:1px solid #dbe3ef;
+  border-radius:18px;
+  padding:24px;
+}
+
+.success{
+  color:#059669;
+  font-weight:bold;
+  margin:0 0 12px;
+}
+
+.warning{
+  color:#c2410c;
+  font-weight:bold;
+}
+
+.banner{
+  width:100%;
+  max-width:520px;
+  aspect-ratio:1/1;
+  background:#111827;
+  border-radius:14px;
+  padding:28px;
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+
+.banner-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+  gap:14px;
+}
+
+.badge{
+  background:#16a34a;
+  color:white;
+  padding:9px 16px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.brand{
+  color:#38bdf8;
+  font-size:12px;
+  font-weight:bold;
+  text-align:right;
+}
+
+.banner-content{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  align-items:center;
+}
+
+.product-box{
+  background:#1f2937;
+  border-radius:16px;
+  height:210px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.product-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.placeholder{
+  font-size:50px;
+}
+
+.offer h2{
+  font-size:36px;
+  line-height:34px;
+  margin:0 0 10px;
+}
+
+.offer .produto{
+  font-size:16px;
+  color:#cbd5e1;
+  margin-bottom:15px;
+}
+
+.price-box{
+  background:#ef4444;
+  border-radius:12px;
+  padding:14px 18px;
+  transform:rotate(-2deg);
+}
+
+.price-label{
+  font-size:11px;
+  font-weight:bold;
+}
+
+.price{
+  font-size:34px;
+  font-weight:900;
+}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:24px;
+}
+
+.metric{
+  background:#263244;
+  border-radius:9px;
+  padding:10px;
+}
+
+.metric span{
+  display:block;
+  color:#94a3b8;
+  font-size:11px;
+}
+
+.metric b{
+  font-size:15px;
+}
+
+.cta{
+  position:absolute;
+  left:28px;
+  right:28px;
+  bottom:24px;
+  background:#16a34a;
+  color:white;
+  text-align:center;
+  padding:16px;
+  border-radius:12px;
+  font-weight:900;
+  font-size:18px;
+}
+
+
+/* ============================================================
+   CAMPANHA ROBOX
+   ============================================================ */
+
+.robox-panel{
+  margin-top:24px;
+  padding:22px;
+  border-radius:18px;
+  border:1px solid #bfdbfe;
+  background:#eff6ff;
+}
+
+.robox-panel h3{
+  margin:0 0 6px;
+  font-size:20px;
+}
+
+.robox-sub{
+  color:#475569;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:18px;
+}
+
+.status-box{
+  padding:13px 15px;
+  border-radius:12px;
+  margin-bottom:16px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.status-ok{
+  background:#dcfce7;
+  color:#047857;
+}
+
+.status-warning{
+  background:#ffedd5;
+  color:#c2410c;
+}
+
+.info-box{
+  background:white;
+  border:1px solid #dbe3ef;
+  border-radius:12px;
+  padding:14px;
+  margin-top:10px;
+}
+
+.info-box span{
+  display:block;
+  font-size:11px;
+  text-transform:uppercase;
+  color:#64748b;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.info-box b{
+  font-size:14px;
+  word-break:break-word;
+}
+
+.actions-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.actions-grid button{
+  margin:0;
+}
+
+.whatsapp-box{
+  margin-top:18px;
+  background:#ecfdf5;
+  border:1px solid #a7f3d0;
+  border-radius:15px;
+  padding:16px;
+}
+
+.whatsapp-box h4{
+  margin:0 0 10px;
+  color:#047857;
+}
+
+.small{
+  font-size:12px;
+  color:#64748b;
+  line-height:1.5;
+  margin-top:7px;
+}
+
+.separator{
+  height:1px;
+  background:#e2e8f0;
+  margin:22px 0;
+}
+
+@media(max-width:900px){
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .banner{
+    max-width:100%;
+  }
+
+  .actions-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <header>
-  <h1>🎨 ROBOX CREATIVE AI STUDIO</h1>
+
+  <h1>
+    🎨 ROBOX CREATIVE AI STUDIO
+  </h1>
+
+  <p>
+    Transforme oportunidades identificadas pelo Robox em campanhas comerciais rastreáveis.
+  </p>
+
 </header>
 
+
 <div class="container">
+
   <div class="card">
+
     <div class="grid">
 
+
+      <!-- ====================================================
+           COLUNA ESQUERDA
+           ==================================================== -->
+
       <div>
-        <h2>Gerador de Campanhas</h2>
 
-        <label>Headline</label>
-        <input id="headline" value="PROMOÇÃO ESPECIAL">
+        <h2>
+          Gerador de Campanhas
+        </h2>
 
-        <label>Produto</label>
-        <input id="produto" value="CAMISETA BÁSICA">
 
-        <label>Preço</label>
-        <input id="preco" value="R$ 49,90">
+        <label>
+          Headline
+        </label>
 
-        <label>Estoque</label>
-        <input id="estoque" value="30">
+        <input
+          id="headline"
+          value="PROMOÇÃO ESPECIAL"
+        >
 
-        <label>Prioridade</label>
-        <input id="prioridade" value="ALTA">
 
-        <label>Ação</label>
-        <input id="acao" value="Anunciar no WhatsApp">
+        <label>
+          Produto
+        </label>
 
-        <label>Score Robox</label>
-        <input id="score" value="92">
+        <input
+          id="produto"
+          value="CAMISETA BÁSICA"
+        >
 
-        <label>Imagem do Produto</label>
-        <input id="imagem" placeholder="URL pública da imagem">
 
-        <button onclick="atualizarBanner()">🚀 GERAR CAMPANHA</button>
-        <button class="btn-green" onclick="baixarBanner()">⬇️ BAIXAR PNG</button>
+        <label>
+          Preço
+        </label>
+
+        <input
+          id="preco"
+          value="R$ 49,90"
+        >
+
+
+        <label>
+          Estoque
+        </label>
+
+        <input
+          id="estoque"
+          value="30"
+        >
+
+
+        <label>
+          Prioridade
+        </label>
+
+        <input
+          id="prioridade"
+          value="ALTA"
+        >
+
+
+        <label>
+          Ação
+        </label>
+
+        <input
+          id="acao"
+          value="CHAME NO WHATSAPP"
+        >
+
+
+        <label>
+          Score Robox
+        </label>
+
+        <input
+          id="score"
+          value="92"
+        >
+
+
+        <label>
+          Imagem do Produto
+        </label>
+
+        <input
+          id="imagem"
+          placeholder="URL pública da imagem"
+        >
+
+
+        <button
+          onclick="atualizarCriativo()">
+
+          🔄 ATUALIZAR CRIATIVO
+
+        </button>
+
+
+        <button
+          class="btn-green"
+          onclick="baixarBanner()">
+
+          ⬇️ BAIXAR PNG
+
+        </button>
+
+
+        <!-- ==================================================
+             INTEGRACAO ROBOX
+             ================================================== -->
+
+        <div class="separator"></div>
+
+
+        <h3>
+          🔗 Integração com o Robox
+        </h3>
+
+
+        <label>
+          URL do Web App ROBOX
+        </label>
+
+        <input
+          id="roboxUrl"
+          placeholder="Cole aqui o endereço /exec do ROBOX"
+        >
+
+
+        <button
+          class="btn-dark"
+          onclick="salvarUrlRobox()">
+
+          💾 SALVAR URL DO ROBOX
+
+        </button>
+
+
+        <div class="small">
+
+          Você precisa informar essa URL apenas uma vez neste navegador.
+          É o endereço do ROBOX BAIRRO que termina em <b>/exec</b>.
+
+        </div>
+
       </div>
 
-      <div class="preview">
-        <h3>Prévia da Campanha</h3>
-        <p class="success">✅ Campanha pronta para visualização</p>
 
-        <div id="banner" class="banner">
+      <!-- ====================================================
+           COLUNA DIREITA
+           ==================================================== -->
+
+      <div class="preview">
+
+        <h3>
+          Prévia da Campanha
+        </h3>
+
+
+        <p class="success">
+          ✅ Criativo pronto para visualização
+        </p>
+
+
+        <div
+          id="banner"
+          class="banner">
+
           <div class="banner-top">
-            <div class="badge">🤖 RECOMENDADO PELA IA</div>
-            <div class="brand">ROBOX CREATIVE AI</div>
+
+            <div class="badge">
+              🤖 RECOMENDADO PELA IA
+            </div>
+
+            <div class="brand">
+              ROBOX CREATIVE AI
+            </div>
+
           </div>
+
 
           <div class="banner-content">
-            <div class="product-box" id="boxImagem">
-              <div class="placeholder">👕</div>
+
+            <div
+              class="product-box"
+              id="boxImagem">
+
+              <div class="placeholder">
+                👕
+              </div>
+
             </div>
+
 
             <div class="offer">
-              <h2 id="b_headline">PROMOÇÃO<br>ESPECIAL</h2>
-              <div class="produto" id="b_produto">CAMISETA BÁSICA</div>
+
+              <h2 id="b_headline">
+                PROMOÇÃO<br>ESPECIAL
+              </h2>
+
+              <div
+                class="produto"
+                id="b_produto">
+
+                CAMISETA BÁSICA
+
+              </div>
+
 
               <div class="price-box">
-                <div class="price-label">POR APENAS</div>
-                <div class="price" id="b_preco">R$ 49,90</div>
+
+                <div class="price-label">
+                  POR APENAS
+                </div>
+
+                <div
+                  class="price"
+                  id="b_preco">
+
+                  R$ 49,90
+
+                </div>
+
               </div>
+
             </div>
+
           </div>
+
 
           <div class="metrics">
-            <div class="metric"><span>Estoque</span><b id="b_estoque">30</b></div>
-            <div class="metric"><span>Prioridade</span><b id="b_prioridade">ALTA</b></div>
-            <div class="metric"><span>Score Robox</span><b id="b_score">92</b></div>
+
+            <div class="metric">
+
+              <span>
+                Estoque
+              </span>
+
+              <b id="b_estoque">
+                30
+              </b>
+
+            </div>
+
+
+            <div class="metric">
+
+              <span>
+                Prioridade
+              </span>
+
+              <b id="b_prioridade">
+                ALTA
+              </b>
+
+            </div>
+
+
+            <div class="metric">
+
+              <span>
+                Score Robox
+              </span>
+
+              <b id="b_score">
+                92
+              </b>
+
+            </div>
+
           </div>
 
-          <div class="cta" id="b_cta">CHAME NO WHATSAPP</div>
+
+          <div
+            class="cta"
+            id="b_cta">
+
+            CHAME NO WHATSAPP
+
+          </div>
+
         </div>
+
+
+        <!-- ==================================================
+             CAMPANHA ROBOX
+             ================================================== -->
+
+        <div
+          id="painelCampanha"
+          class="robox-panel">
+
+          <h3>
+            🛡️ Campanha Robox
+          </h3>
+
+
+          <div class="robox-sub">
+
+            Esta área mostra a identidade rastreável da campanha
+            criada pelo Robox.
+
+          </div>
+
+
+          <div
+            id="statusCampanha"
+            class="status-box status-warning">
+
+            ⚠️ Verificando campanha...
+
+          </div>
+
+
+          <div class="info-box">
+
+            <span>
+              ID da campanha
+            </span>
+
+            <b id="codigoCampanhaTela">
+              -
+            </b>
+
+          </div>
+
+
+          <div class="info-box">
+
+            <span>
+              Link rastreável da oferta
+            </span>
+
+            <b id="linkOfertaTela">
+              Configure a URL do Robox
+            </b>
+
+          </div>
+
+
+          <div class="actions-grid">
+
+            <button
+              id="btnCopiarLink"
+              onclick="copiarLinkOferta()">
+
+              📋 COPIAR OFERTA
+
+            </button>
+
+
+            <button
+              id="btnAbrirOferta"
+              class="btn-dark"
+              onclick="abrirOferta()">
+
+              👁 ABRIR OFERTA
+
+            </button>
+
+
+          </div>
+
+
+          <!-- ================================================
+               WHATSAPP
+               ================================================ -->
+
+          <div class="whatsapp-box">
+
+            <h4>
+              💬 Enviar para o cliente
+            </h4>
+
+
+            <label>
+              WhatsApp do cliente (opcional)
+            </label>
+
+            <input
+              id="whatsappCliente"
+              placeholder="Ex.: 54999999999"
+            >
+
+
+            <button
+              class="btn-green"
+              onclick="enviarWhatsApp()">
+
+              💬 ENVIAR NO WHATSAPP
+
+            </button>
+
+
+            <div class="small">
+
+              Se deixar o número vazio, o WhatsApp abrirá para
+              você escolher o contato.
+
+            </div>
+
+          </div>
+
+
+        </div>
+
       </div>
 
     </div>
+
   </div>
+
 </div>
 
+
 <script>
+
+
+// ============================================================
+// ESTADO
+// ============================================================
+
+let codigoCampanhaAtual = '';
+
+let linkOfertaAtual = '';
+
+
+// ============================================================
+// INICIAR
+// ============================================================
+
 function carregarParametros(){
-  const params = new URLSearchParams(window.location.search);
-  const campos = ["headline","produto","preco","estoque","prioridade","acao","score","imagem"];
 
-  campos.forEach(campo=>{
-    const valor = params.get(campo);
-    if(valor !== null){
-      document.getElementById(campo).value = valor;
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  // ==========================================================
+  // DADOS DO PRODUTO
+  // ==========================================================
+
+  const campos = [
+
+    'headline',
+
+    'produto',
+
+    'preco',
+
+    'estoque',
+
+    'prioridade',
+
+    'acao',
+
+    'score',
+
+    'imagem'
+
+  ];
+
+
+  campos.forEach(
+
+    function(campo){
+
+      const valor =
+        params.get(
+          campo
+        );
+
+
+      if(
+        valor !== null
+        &&
+        document.getElementById(
+          campo
+        )
+      ){
+
+        document.getElementById(
+          campo
+        ).value =
+          valor;
+
+      }
+
     }
-  });
 
-  atualizarBanner();
-}
+  );
 
-function atualizarBanner(){
-  const headline = document.getElementById("headline").value || "PROMOÇÃO ESPECIAL";
-  const produto = document.getElementById("produto").value || "Produto";
-  const preco = document.getElementById("preco").value || "R$ 0,00";
-  const estoque = document.getElementById("estoque").value || "0";
-  const prioridade = document.getElementById("prioridade").value || "NORMAL";
-  const score = document.getElementById("score").value || "0";
-  const imagem = document.getElementById("imagem").value || "";
 
-  document.getElementById("b_headline").innerHTML = headline.replace(" ", "<br>");
-  document.getElementById("b_produto").innerText = produto;
-  document.getElementById("b_preco").innerText = preco;
-  document.getElementById("b_estoque").innerText = estoque;
-  document.getElementById("b_prioridade").innerText = prioridade;
-  document.getElementById("b_score").innerText = score;
+  // ==========================================================
+  // CODIGO REAL DA CAMPANHA ROBOX
+  // ==========================================================
 
-  const box = document.getElementById("boxImagem");
+  codigoCampanhaAtual =
+    String(
 
-  if (imagem) {
-  box.innerHTML = "";
-  const img = document.createElement("img");
-  img.src = imagem;
-  img.onerror = function () {
-    box.innerHTML = '<div class="placeholder">👕</div>';
-  };
-  box.appendChild(img);
-} else {
-  box.innerHTML = '<div class="placeholder">👕</div>';
+      params.get(
+        'codigoCampanha'
+      )
+
+      ||
+
+      params.get(
+        'rbx'
+      )
+
+      ||
+
+      params.get(
+        'campanha'
+      )
+
+      ||
+
+      ''
+
+    );
+
+
+  // ==========================================================
+  // URL WEB APP RECEBIDA AUTOMATICAMENTE
+  // ==========================================================
+
+  const webAppUrlRecebida =
+    String(
+      params.get(
+        'webAppUrl'
+      )
+      ||
+      ''
+    );
+
+
+  if(
+    webAppUrlRecebida
+  ){
+
+    document.getElementById(
+      'roboxUrl'
+    ).value =
+      webAppUrlRecebida;
+
+
+    localStorage.setItem(
+      'roboxWebAppUrl',
+      webAppUrlRecebida
+    );
+
   }
+
+  else{
+
+    const salva =
+      localStorage.getItem(
+        'roboxWebAppUrl'
+      )
+      ||
+      '';
+
+
+    document.getElementById(
+      'roboxUrl'
+    ).value =
+      salva;
+
+  }
+
+
+  atualizarCriativo();
+
+  atualizarPainelCampanha();
+
 }
+
+
+// ============================================================
+// ATUALIZAR CRIATIVO
+// ============================================================
+
+function atualizarCriativo(){
+
+  const headline =
+    document.getElementById(
+      'headline'
+    ).value
+    ||
+    'PROMOÇÃO ESPECIAL';
+
+
+  const produto =
+    document.getElementById(
+      'produto'
+    ).value
+    ||
+    'Produto';
+
+
+  const preco =
+    document.getElementById(
+      'preco'
+    ).value
+    ||
+    'R$ 0,00';
+
+
+  const estoque =
+    document.getElementById(
+      'estoque'
+    ).value
+    ||
+    '0';
+
+
+  const prioridade =
+    document.getElementById(
+      'prioridade'
+    ).value
+    ||
+    'NORMAL';
+
+
+  const score =
+    document.getElementById(
+      'score'
+    ).value
+    ||
+    '0';
+
+
+  const imagem =
+    document.getElementById(
+      'imagem'
+    ).value
+    ||
+    '';
+
+
+  const acao =
+    document.getElementById(
+      'acao'
+    ).value
+    ||
+    'CHAME NO WHATSAPP';
+
+
+  // ==========================================================
+  // TEXTO
+  // ==========================================================
+
+  document.getElementById(
+    'b_headline'
+  ).innerHTML =
+    quebrarHeadline(
+      headline
+    );
+
+
+  document.getElementById(
+    'b_produto'
+  ).innerText =
+    produto;
+
+
+  document.getElementById(
+    'b_preco'
+  ).innerText =
+    preco;
+
+
+  document.getElementById(
+    'b_estoque'
+  ).innerText =
+    estoque;
+
+
+  document.getElementById(
+    'b_prioridade'
+  ).innerText =
+    prioridade;
+
+
+  document.getElementById(
+    'b_score'
+  ).innerText =
+    score;
+
+
+  document.getElementById(
+    'b_cta'
+  ).innerText =
+    String(
+      acao
+    ).toUpperCase();
+
+
+  // ==========================================================
+  // IMAGEM
+  // ==========================================================
+
+  const box =
+    document.getElementById(
+      'boxImagem'
+    );
+
+
+  if(
+    imagem
+  ){
+
+    box.innerHTML =
+      '';
+
+
+    const img =
+      document.createElement(
+        'img'
+      );
+
+
+    img.src =
+      imagem;
+
+
+    img.crossOrigin =
+      'anonymous';
+
+
+    img.onerror =
+      function(){
+
+        box.innerHTML =
+          '<div class="placeholder">👕</div>';
+
+      };
+
+
+    box.appendChild(
+      img
+    );
+
+  }
+
+  else{
+
+    box.innerHTML =
+      '<div class="placeholder">👕</div>';
+
+  }
+
+
+  atualizarPainelCampanha();
+
+}
+
+
+// ============================================================
+// QUEBRAR HEADLINE
+// ============================================================
+
+function quebrarHeadline(texto){
+
+  const palavras =
+    String(
+      texto
+    )
+    .trim()
+    .split(
+      /\s+/
+    );
+
+
+  if(
+    palavras.length <= 1
+  ){
+
+    return texto;
+
+  }
+
+
+  const meio =
+    Math.ceil(
+      palavras.length / 2
+    );
+
+
+  return (
+
+    palavras
+      .slice(
+        0,
+        meio
+      )
+      .join(
+        ' '
+      )
+
+    +
+
+    '<br>'
+
+    +
+
+    palavras
+      .slice(
+        meio
+      )
+      .join(
+        ' '
+      )
+
+  );
+
+}
+
+
+// ============================================================
+// SALVAR URL ROBOX
+// ============================================================
+
+function salvarUrlRobox(){
+
+  let url =
+    String(
+      document.getElementById(
+        'roboxUrl'
+      ).value
+      ||
+      ''
+    )
+    .trim();
+
+
+  if(
+    !url
+  ){
+
+    alert(
+      'Informe o endereço do Web App ROBOX.'
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !url.includes(
+      '/exec'
+    )
+  ){
+
+    alert(
+      'Use o endereço publicado do ROBOX que termina em /exec.'
+    );
+
+    return;
+
+  }
+
+
+  // Remove query string existente
+  url =
+    url.split(
+      '?'
+    )[0];
+
+
+  document.getElementById(
+    'roboxUrl'
+  ).value =
+    url;
+
+
+  localStorage.setItem(
+    'roboxWebAppUrl',
+    url
+  );
+
+
+  atualizarPainelCampanha();
+
+
+  alert(
+    'URL do ROBOX salva com sucesso.'
+  );
+
+}
+
+
+// ============================================================
+// GERAR LINK RASTREAVEL
+// ============================================================
+
+function gerarLinkOferta(){
+
+  const base =
+    String(
+      document.getElementById(
+        'roboxUrl'
+      ).value
+      ||
+      ''
+    )
+    .trim();
+
+
+  if(
+    !base
+    ||
+    !codigoCampanhaAtual
+  ){
+
+    return '';
+
+  }
+
+
+  try{
+
+    const url =
+      new URL(
+        base
+      );
+
+
+    url.searchParams.set(
+      'rbx',
+      codigoCampanhaAtual
+    );
+
+
+    url.searchParams.set(
+      'origem',
+      'LINK'
+    );
+
+
+    return url.toString();
+
+  }
+
+  catch(error){
+
+    return '';
+
+  }
+
+}
+
+
+// ============================================================
+// ATUALIZAR PAINEL
+// ============================================================
+
+function atualizarPainelCampanha(){
+
+  const status =
+    document.getElementById(
+      'statusCampanha'
+    );
+
+
+  const codigoTela =
+    document.getElementById(
+      'codigoCampanhaTela'
+    );
+
+
+  const linkTela =
+    document.getElementById(
+      'linkOfertaTela'
+    );
+
+
+  codigoTela.innerText =
+    codigoCampanhaAtual
+    ||
+    'SEM ID ROBOX';
+
+
+  linkOfertaAtual =
+    gerarLinkOferta();
+
+
+  // ==========================================================
+  // CAMPANHA COMPLETA
+  // ==========================================================
+
+  if(
+    codigoCampanhaAtual
+    &&
+    linkOfertaAtual
+  ){
+
+    status.className =
+      'status-box status-ok';
+
+
+    status.innerText =
+      '✅ CAMPANHA ROBOX RASTREÁVEL';
+
+
+    linkTela.innerText =
+      linkOfertaAtual;
+
+
+    habilitarAcoes(
+      true
+    );
+
+
+    return;
+
+  }
+
+
+  // ==========================================================
+  // TEM CODIGO MAS NAO TEM URL
+  // ==========================================================
+
+  if(
+    codigoCampanhaAtual
+    &&
+    !linkOfertaAtual
+  ){
+
+    status.className =
+      'status-box status-warning';
+
+
+    status.innerText =
+      '⚠️ Campanha identificada. Falta informar a URL do Web App ROBOX.';
+
+
+    linkTela.innerText =
+      'Informe e salve o endereço /exec do ROBOX.';
+
+
+    habilitarAcoes(
+      false
+    );
+
+
+    return;
+
+  }
+
+
+  // ==========================================================
+  // SEM CODIGO
+  // ==========================================================
+
+  status.className =
+    'status-box status-warning';
+
+
+  status.innerText =
+    '⚠️ Este criativo não recebeu um ID de campanha Robox.';
+
+
+  linkTela.innerText =
+    'Abra o Creative AI pelo botão Criar Campanha do ROBOX.';
+
+
+  habilitarAcoes(
+    false
+  );
+
+}
+
+
+// ============================================================
+// HABILITAR ACOES
+// ============================================================
+
+function habilitarAcoes(
+  ativo
+){
+
+  document.getElementById(
+    'btnCopiarLink'
+  ).disabled =
+    !ativo;
+
+
+  document.getElementById(
+    'btnAbrirOferta'
+  ).disabled =
+    !ativo;
+
+}
+
+
+// ============================================================
+// COPIAR LINK
+// ============================================================
+
+async function copiarLinkOferta(){
+
+  if(
+    !linkOfertaAtual
+  ){
+
+    alert(
+      'O link rastreável ainda não está disponível.'
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await navigator.clipboard.writeText(
+      linkOfertaAtual
+    );
+
+
+    alert(
+      'Link da oferta copiado.'
+    );
+
+  }
+
+  catch(error){
+
+    prompt(
+      'Copie o link abaixo:',
+      linkOfertaAtual
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// ABRIR OFERTA
+// ============================================================
+
+function abrirOferta(){
+
+  if(
+    !linkOfertaAtual
+  ){
+
+    alert(
+      'Configure o link rastreável primeiro.'
+    );
+
+    return;
+
+  }
+
+
+  window.open(
+    linkOfertaAtual,
+    '_blank'
+  );
+
+}
+
+
+// ============================================================
+// MENSAGEM COMERCIAL
+// ============================================================
+
+function montarMensagemCliente(){
+
+  const produto =
+    document.getElementById(
+      'produto'
+    ).value
+    ||
+    'Produto';
+
+
+  const preco =
+    document.getElementById(
+      'preco'
+    ).value
+    ||
+    '';
+
+
+  const headline =
+    document.getElementById(
+      'headline'
+    ).value
+    ||
+    'Oferta especial';
+
+
+  return (
+
+    '🔥 '
+    +
+    headline
+    +
+    '\n\n'
+
+    +
+
+    'Produto: '
+    +
+    produto
+    +
+    '\n'
+
+    +
+
+    (
+      preco
+      ?
+      'Preço: ' + preco + '\n'
+      :
+      ''
+    )
+
+    +
+
+    '\nConfira a oferta:\n'
+
+    +
+
+    linkOfertaAtual
+
+  );
+
+}
+
+
+// ============================================================
+// WHATSAPP
+// ============================================================
+
+function enviarWhatsApp(){
+
+  if(
+    !linkOfertaAtual
+  ){
+
+    alert(
+      'O link rastreável da oferta ainda não está disponível.'
+    );
+
+    return;
+
+  }
+
+
+  const mensagem =
+    montarMensagemCliente();
+
+
+  let numero =
+    String(
+      document.getElementById(
+        'whatsappCliente'
+      ).value
+      ||
+      ''
+    );
+
+
+  numero =
+    numero.replace(
+      /\D/g,
+      ''
+    );
+
+
+  let url =
+    'https://wa.me/';
+
+
+  if(
+    numero
+  ){
+
+    // Se digitou DDD + telefone sem país,
+    // acrescenta Brasil 55.
+
+    if(
+      numero.length === 10
+      ||
+      numero.length === 11
+    ){
+
+      numero =
+        '55'
+        +
+        numero;
+
+    }
+
+
+    url +=
+      numero;
+
+  }
+
+
+  url +=
+    '?text='
+    +
+    encodeURIComponent(
+      mensagem
+    );
+
+
+  window.open(
+    url,
+    '_blank'
+  );
+
+}
+
+
+// ============================================================
+// BAIXAR PNG
+// ============================================================
+
 async function baixarBanner(){
-  const banner = document.getElementById("banner");
 
-  const canvas = await html2canvas(banner,{
-    scale:2,
-    useCORS:true,
-    backgroundColor:null
-  });
+  try{
 
-  const link = document.createElement("a");
-  link.download = "robox-campanha.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
+    atualizarCriativo();
+
+
+    const banner =
+      document.getElementById(
+        'banner'
+      );
+
+
+    const canvas =
+      await html2canvas(
+        banner,
+        {
+
+          scale:
+            2,
+
+          useCORS:
+            true,
+
+          allowTaint:
+            false,
+
+          backgroundColor:
+            null
+
+        }
+      );
+
+
+    const link =
+      document.createElement(
+        'a'
+      );
+
+
+    link.download =
+      codigoCampanhaAtual
+      ?
+      codigoCampanhaAtual
+      +
+      '.png'
+      :
+      'robox-campanha.png';
+
+
+    link.href =
+      canvas.toDataURL(
+        'image/png'
+      );
+
+
+    link.click();
+
+  }
+
+  catch(error){
+
+    console.error(
+      error
+    );
+
+
+    alert(
+      'Não foi possível baixar o PNG. Se houver imagem externa, verifique se ela permite acesso público.'
+    );
+
+  }
+
 }
 
-carregarParametros();
+
+// ============================================================
+// ATUALIZAR AUTOMATICAMENTE A PREVIA
+// ============================================================
+
+function ativarAtualizacaoAutomatica(){
+
+  const campos = [
+
+    'headline',
+
+    'produto',
+
+    'preco',
+
+    'estoque',
+
+    'prioridade',
+
+    'acao',
+
+    'score',
+
+    'imagem'
+
+  ];
+
+
+  campos.forEach(
+
+    function(id){
+
+      const elemento =
+        document.getElementById(
+          id
+        );
+
+
+      if(
+        elemento
+      ){
+
+        elemento.addEventListener(
+          'input',
+          atualizarCriativo
+        );
+
+      }
+
+    }
+
+  );
+
+}
+
+
+// ============================================================
+// INICIALIZAR
+// ============================================================
+
+document.addEventListener(
+
+  'DOMContentLoaded',
+
+  function(){
+
+    ativarAtualizacaoAutomatica();
+
+    carregarParametros();
+
+  }
+
+);
+
 </script>
 
 </body>
+
 </html>
