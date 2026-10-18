@@ -117,10 +117,6 @@ button:disabled{
   background:#475569;
 }
 
-.btn-orange{
-  background:#ea580c;
-}
-
 .preview{
   background:#f8fafc;
   border:1px solid #dbe3ef;
@@ -132,11 +128,6 @@ button:disabled{
   color:#059669;
   font-weight:bold;
   margin:0 0 12px;
-}
-
-.warning{
-  color:#c2410c;
-  font-weight:bold;
 }
 
 .banner{
@@ -190,16 +181,33 @@ button:disabled{
   align-items:center;
   justify-content:center;
   overflow:hidden;
+  position:relative;
 }
 
 .product-box img{
   width:100%;
   height:100%;
   object-fit:cover;
+  display:block;
 }
 
 .placeholder{
   font-size:50px;
+}
+
+.imagem-status{
+  margin-top:7px;
+  font-size:11px;
+  color:#64748b;
+  line-height:1.4;
+}
+
+.imagem-status.ok{
+  color:#047857;
+}
+
+.imagem-status.erro{
+  color:#b91c1c;
 }
 
 .offer h2{
@@ -401,7 +409,8 @@ button:disabled{
   </h1>
 
   <p>
-    Transforme oportunidades identificadas pelo Robox em campanhas comerciais rastreáveis.
+    Transforme oportunidades identificadas pelo Robox
+    em campanhas comerciais rastreáveis.
   </p>
 
 </header>
@@ -505,6 +514,15 @@ button:disabled{
         >
 
 
+        <div
+          id="imagemStatus"
+          class="imagem-status">
+
+          A imagem será carregada automaticamente.
+
+        </div>
+
+
         <button
           onclick="atualizarCriativo()">
 
@@ -521,10 +539,6 @@ button:disabled{
 
         </button>
 
-
-        <!-- ==================================================
-             INTEGRACAO ROBOX
-             ================================================== -->
 
         <div class="separator"></div>
 
@@ -714,8 +728,8 @@ button:disabled{
 
           <div class="robox-sub">
 
-            Esta área mostra a identidade rastreável da campanha
-            criada pelo Robox.
+            Esta área mostra a identidade rastreável
+            da campanha criada pelo Robox.
 
           </div>
 
@@ -775,13 +789,8 @@ button:disabled{
 
             </button>
 
-
           </div>
 
-
-          <!-- ================================================
-               WHATSAPP
-               ================================================ -->
 
           <div class="whatsapp-box">
 
@@ -811,8 +820,8 @@ button:disabled{
 
             <div class="small">
 
-              Se deixar o número vazio, o WhatsApp abrirá para
-              você escolher o contato.
+              Se deixar o número vazio, o WhatsApp abrirá
+              para você escolher o contato.
 
             </div>
 
@@ -841,6 +850,360 @@ let codigoCampanhaAtual = '';
 
 let linkOfertaAtual = '';
 
+let imagemAtualCarregada = '';
+
+
+// ============================================================
+// EXTRAIR ID GOOGLE DRIVE
+// ============================================================
+
+function extrairIdGoogleDrive(url){
+
+  if(
+    !url
+  ){
+
+    return '';
+
+  }
+
+
+  const texto =
+    String(
+      url
+    );
+
+
+  // ==========================================================
+  // ?id=XXXX
+  // ==========================================================
+
+  let match =
+    texto.match(
+      /[?&]id=([^&]+)/i
+    );
+
+
+  if(
+    match
+    &&
+    match[1]
+  ){
+
+    return decodeURIComponent(
+      match[1]
+    );
+
+  }
+
+
+  // ==========================================================
+  // /file/d/XXXX
+  // ==========================================================
+
+  match =
+    texto.match(
+      /\/file\/d\/([^/]+)/i
+    );
+
+
+  if(
+    match
+    &&
+    match[1]
+  ){
+
+    return decodeURIComponent(
+      match[1]
+    );
+
+  }
+
+
+  // ==========================================================
+  // /d/XXXX
+  // ==========================================================
+
+  match =
+    texto.match(
+      /\/d\/([^/=]+)(?:=|\/|$)/i
+    );
+
+
+  if(
+    match
+    &&
+    match[1]
+  ){
+
+    return decodeURIComponent(
+      match[1]
+    );
+
+  }
+
+
+  return '';
+
+}
+
+
+// ============================================================
+// NORMALIZAR URL DA IMAGEM
+// ============================================================
+
+function normalizarImagemProduto(url){
+
+  url =
+    String(
+      url
+      ||
+      ''
+    )
+    .trim();
+
+
+  if(
+    !url
+  ){
+
+    return '';
+
+  }
+
+
+  // ==========================================================
+  // GOOGLEUSERCONTENT JA PRONTO
+  // ==========================================================
+
+  if(
+    url.includes(
+      'googleusercontent.com'
+    )
+  ){
+
+    return url;
+
+  }
+
+
+  // ==========================================================
+  // GOOGLE DRIVE
+  // ==========================================================
+
+  if(
+    url.includes(
+      'drive.google.com'
+    )
+  ){
+
+    const id =
+      extrairIdGoogleDrive(
+        url
+      );
+
+
+    if(
+      id
+    ){
+
+      return (
+        'https://lh3.googleusercontent.com/d/'
+        +
+        id
+        +
+        '=w1000'
+      );
+
+    }
+
+  }
+
+
+  // ==========================================================
+  // OUTRAS IMAGENS
+  // ==========================================================
+
+  return url;
+
+}
+
+
+// ============================================================
+// STATUS IMAGEM
+// ============================================================
+
+function atualizarStatusImagem(
+  mensagem,
+  tipo
+){
+
+  const status =
+    document.getElementById(
+      'imagemStatus'
+    );
+
+
+  status.className =
+    'imagem-status'
+    +
+    (
+      tipo
+      ?
+      ' ' + tipo
+      :
+      ''
+    );
+
+
+  status.textContent =
+    mensagem;
+
+}
+
+
+// ============================================================
+// CARREGAR IMAGEM COM FALLBACK
+// ============================================================
+
+function carregarImagemProduto(
+  urlOriginal
+){
+
+  const box =
+    document.getElementById(
+      'boxImagem'
+    );
+
+
+  const urlNormalizada =
+    normalizarImagemProduto(
+      urlOriginal
+    );
+
+
+  if(
+    !urlNormalizada
+  ){
+
+    box.innerHTML =
+      '<div class="placeholder">👕</div>';
+
+
+    imagemAtualCarregada =
+      '';
+
+
+    atualizarStatusImagem(
+      'Nenhuma imagem informada.',
+      ''
+    );
+
+
+    return;
+
+  }
+
+
+  atualizarStatusImagem(
+    'Carregando imagem...',
+    ''
+  );
+
+
+  box.innerHTML =
+    '';
+
+
+  const img =
+    document.createElement(
+      'img'
+    );
+
+
+  // ==========================================================
+  // NAO USAMOS crossOrigin AQUI.
+  // ISSO E IMPORTANTE PARA O GOOGLE DRIVE.
+  // ==========================================================
+
+  img.src =
+    urlNormalizada;
+
+
+  img.alt =
+    document.getElementById(
+      'produto'
+    ).value
+    ||
+    'Produto';
+
+
+  img.onload =
+    function(){
+
+      imagemAtualCarregada =
+        urlNormalizada;
+
+
+      atualizarStatusImagem(
+        '✅ Imagem carregada com sucesso.',
+        'ok'
+      );
+
+    };
+
+
+  img.onerror =
+    function(){
+
+      // ======================================================
+      // SE URL NORMALIZADA FALHAR,
+      // TENTAR URL ORIGINAL
+      // ======================================================
+
+      if(
+        urlOriginal
+        &&
+        urlOriginal !== urlNormalizada
+        &&
+        img.dataset.fallback !== '1'
+      ){
+
+        img.dataset.fallback =
+          '1';
+
+
+        img.src =
+          urlOriginal;
+
+
+        return;
+
+      }
+
+
+      box.innerHTML =
+        '<div class="placeholder">👕</div>';
+
+
+      imagemAtualCarregada =
+        '';
+
+
+      atualizarStatusImagem(
+        '⚠️ Não foi possível carregar a imagem.',
+        'erro'
+      );
+
+    };
+
+
+  box.appendChild(
+    img
+  );
+
+}
+
 
 // ============================================================
 // INICIAR
@@ -853,10 +1216,6 @@ function carregarParametros(){
       window.location.search
     );
 
-
-  // ==========================================================
-  // DADOS DO PRODUTO
-  // ==========================================================
 
   const campos = [
 
@@ -909,10 +1268,6 @@ function carregarParametros(){
   );
 
 
-  // ==========================================================
-  // CODIGO REAL DA CAMPANHA ROBOX
-  // ==========================================================
-
   codigoCampanhaAtual =
     String(
 
@@ -938,10 +1293,6 @@ function carregarParametros(){
 
     );
 
-
-  // ==========================================================
-  // URL WEB APP RECEBIDA AUTOMATICAMENTE
-  // ==========================================================
 
   const webAppUrlRecebida =
     String(
@@ -1065,10 +1416,6 @@ function atualizarCriativo(){
     'CHAME NO WHATSAPP';
 
 
-  // ==========================================================
-  // TEXTO
-  // ==========================================================
-
   document.getElementById(
     'b_headline'
   ).innerHTML =
@@ -1116,58 +1463,12 @@ function atualizarCriativo(){
 
 
   // ==========================================================
-  // IMAGEM
+  // NOVO CARREGAMENTO DE IMAGEM
   // ==========================================================
 
-  const box =
-    document.getElementById(
-      'boxImagem'
-    );
-
-
-  if(
+  carregarImagemProduto(
     imagem
-  ){
-
-    box.innerHTML =
-      '';
-
-
-    const img =
-      document.createElement(
-        'img'
-      );
-
-
-    img.src =
-      imagem;
-
-
-    img.crossOrigin =
-      'anonymous';
-
-
-    img.onerror =
-      function(){
-
-        box.innerHTML =
-          '<div class="placeholder">👕</div>';
-
-      };
-
-
-    box.appendChild(
-      img
-    );
-
-  }
-
-  else{
-
-    box.innerHTML =
-      '<div class="placeholder">👕</div>';
-
-  }
+  );
 
 
   atualizarPainelCampanha();
@@ -1281,7 +1582,6 @@ function salvarUrlRobox(){
   }
 
 
-  // Remove query string existente
   url =
     url.split(
       '?'
@@ -1405,10 +1705,6 @@ function atualizarPainelCampanha(){
     gerarLinkOferta();
 
 
-  // ==========================================================
-  // CAMPANHA COMPLETA
-  // ==========================================================
-
   if(
     codigoCampanhaAtual
     &&
@@ -1437,10 +1733,6 @@ function atualizarPainelCampanha(){
   }
 
 
-  // ==========================================================
-  // TEM CODIGO MAS NAO TEM URL
-  // ==========================================================
-
   if(
     codigoCampanhaAtual
     &&
@@ -1468,10 +1760,6 @@ function atualizarPainelCampanha(){
 
   }
 
-
-  // ==========================================================
-  // SEM CODIGO
-  // ==========================================================
 
   status.className =
     'status-box status-warning';
@@ -1702,9 +1990,6 @@ function enviarWhatsApp(){
     numero
   ){
 
-    // Se digitou DDD + telefone sem país,
-    // acrescenta Brasil 55.
-
     if(
       numero.length === 10
       ||
@@ -1749,9 +2034,6 @@ async function baixarBanner(){
 
   try{
 
-    atualizarCriativo();
-
-
     const banner =
       document.getElementById(
         'banner'
@@ -1770,7 +2052,7 @@ async function baixarBanner(){
             true,
 
           allowTaint:
-            false,
+            true,
 
           backgroundColor:
             null
@@ -1813,7 +2095,7 @@ async function baixarBanner(){
 
 
     alert(
-      'Não foi possível baixar o PNG. Se houver imagem externa, verifique se ela permite acesso público.'
+      'A prévia está correta, mas o navegador não conseguiu gerar o PNG com a imagem externa. Tente novamente ou use uma imagem hospedada fora do Google Drive.'
     );
 
   }
@@ -1822,7 +2104,7 @@ async function baixarBanner(){
 
 
 // ============================================================
-// ATUALIZAR AUTOMATICAMENTE A PREVIA
+// ATUALIZACAO AUTOMATICA
 // ============================================================
 
 function ativarAtualizacaoAutomatica(){
@@ -1841,9 +2123,7 @@ function ativarAtualizacaoAutomatica(){
 
     'acao',
 
-    'score',
-
-    'imagem'
+    'score'
 
   ];
 
@@ -1871,6 +2151,46 @@ function ativarAtualizacaoAutomatica(){
 
     }
 
+  );
+
+
+  // ==========================================================
+  // IMAGEM TEM PEQUENO ATRASO PARA EVITAR RECARREGAR
+  // A CADA LETRA DIGITADA
+  // ==========================================================
+
+  const campoImagem =
+    document.getElementById(
+      'imagem'
+    );
+
+
+  let timerImagem =
+    null;
+
+
+  campoImagem.addEventListener(
+    'input',
+    function(){
+
+      clearTimeout(
+        timerImagem
+      );
+
+
+      timerImagem =
+        setTimeout(
+          function(){
+
+            carregarImagemProduto(
+              campoImagem.value
+            );
+
+          },
+          500
+        );
+
+    }
   );
 
 }
