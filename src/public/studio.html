@@ -502,7 +502,48 @@ button:disabled{
           id="score"
           value="92"
         >
+<label>
+  Desconto recomendado
+</label>
 
+<input
+  id="int_desconto_recomendado"
+  value="—"
+  readonly
+>
+
+
+<label>
+  Margem atual
+</label>
+
+<input
+  id="int_margem_atual"
+  value="—"
+  readonly
+>
+
+
+<label>
+  Margem após oferta
+</label>
+
+<input
+  id="int_margem_apos"
+  value="—"
+  readonly
+>
+
+
+<label>
+  Limite máximo seguro
+</label>
+
+<input
+  id="int_limite_seguro"
+  value="—"
+  readonly
+>
 
         <label>
           Imagem do Produto
@@ -1527,7 +1568,81 @@ document.getElementById(
         }
       )
     : '—';
+// =============================================
+// ROBOX - INDICADORES FINANCEIROS INTERNOS
+// =============================================
 
+var formatarPercentualRobox =
+  function(valor){
+
+    if(
+      valor === null ||
+      valor === undefined ||
+      valor === ''
+    ){
+      return '—';
+    }
+
+    var n =
+      Number(
+        String(valor)
+          .replace(',','.')
+      );
+
+    if(isNaN(n)){
+      return '—';
+    }
+
+    return n
+      .toFixed(2)
+      .replace('.',',') + '%';
+  };
+
+
+var descontoInterno =
+  paramsOferta.get('descontoRecomendado') ||
+  paramsOferta.get('desconto');
+
+var margemAtualInterna =
+  paramsOferta.get('margemAtual');
+
+var margemAposInterna =
+  paramsOferta.get('margemApos');
+
+var limiteSeguroInterno =
+  paramsOferta.get('limiteSeguro');
+
+
+document.getElementById(
+  'int_desconto_recomendado'
+).value =
+  formatarPercentualRobox(
+    descontoInterno
+  );
+
+
+document.getElementById(
+  'int_margem_atual'
+).value =
+  formatarPercentualRobox(
+    margemAtualInterna
+  );
+
+
+document.getElementById(
+  'int_margem_apos'
+).value =
+  formatarPercentualRobox(
+    margemAposInterna
+  );
+
+
+document.getElementById(
+  'int_limite_seguro'
+).value =
+  formatarPercentualRobox(
+    limiteSeguroInterno
+  );
   document.getElementById(
     'b_estoque'
   ).innerText =
