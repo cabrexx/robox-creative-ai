@@ -661,54 +661,57 @@ button:disabled{
 
           <div class="metrics">
 
-            <div class="metric">
+  <div class="metric">
 
-              <span>
-                Estoque
-              </span>
+    <span>
+      De
+    </span>
 
-              <b id="b_estoque">
-                30
-              </b>
+    <b
+      id="b_preco_original"
+      style="text-decoration:line-through; color:#94a3b8;">
+      R$ 0,00
+    </b>
 
-            </div>
-
-
-            <div class="metric">
-
-              <span>
-                Prioridade
-              </span>
-
-              <b id="b_prioridade">
-                ALTA
-              </b>
-
-            </div>
+  </div>
 
 
-            <div class="metric">
+  <div class="metric">
 
-              <span>
-                Score Robox
-              </span>
+    <span>
+      Você economiza
+    </span>
 
-              <b id="b_score">
-                92
-              </b>
+    <b
+      id="b_economia"
+      style="color:#22c55e;">
+      R$ 0,00
+    </b>
 
-            </div>
+  </div>
 
-          </div>
+</div>
 
 
-          <div
-            class="cta"
-            id="b_cta">
+<!-- Mantidos ocultos para compatibilidade com o código atual -->
+<div style="display:none">
 
-            CHAME NO WHATSAPP
+  <b id="b_estoque">0</b>
 
-          </div>
+  <b id="b_prioridade">-</b>
+
+  <b id="b_score">0</b>
+
+</div>
+
+
+<div
+  class="cta"
+  id="b_cta">
+
+  QUERO ESTA OFERTA
+
+</div>
 
         </div>
 
@@ -1416,12 +1419,24 @@ function atualizarCriativo(){
     'CHAME NO WHATSAPP';
 
 
-  document.getElementById(
-    'b_headline'
-  ).innerHTML =
-    quebrarHeadline(
-      headline
-    );
+  // ROBOX - linguagem pública da campanha
+var headlinePublica =
+  String(headline || '')
+    .trim()
+    .toUpperCase() === 'RECUPERE ESTE PRODUTO'
+      ? 'OFERTA ESPECIAL'
+      : String(headline || '').trim();
+
+if(!headlinePublica){
+  headlinePublica = 'OFERTA ESPECIAL';
+}
+
+document.getElementById(
+  'b_headline'
+).innerHTML =
+  quebrarHeadline(
+    headlinePublica
+  );
 
 
   document.getElementById(
@@ -1434,7 +1449,84 @@ function atualizarCriativo(){
     'b_preco'
   ).innerText =
     preco;
+// =============================================
+// ROBOX - PREÇO ANTERIOR E ECONOMIA
+// Criativo público
+// =============================================
 
+var paramsOferta =
+  new URLSearchParams(
+    window.location.search
+  );
+
+var precoOriginalTexto =
+  paramsOferta.get(
+    'precoOriginal'
+  ) || '';
+
+var converterMoedaRobox =
+  function(valor){
+
+    var texto =
+      String(
+        valor || ''
+      )
+        .replace('R$','')
+        .trim()
+        .replace(/\./g,'')
+        .replace(',','.');
+
+    var numero =
+      Number(texto);
+
+    return isNaN(numero)
+      ? 0
+      : numero;
+  };
+
+var valorOriginal =
+  converterMoedaRobox(
+    precoOriginalTexto
+  );
+
+var valorOferta =
+  converterMoedaRobox(
+    preco
+  );
+
+
+document.getElementById(
+  'b_preco_original'
+).innerText =
+  valorOriginal > 0
+    ? valorOriginal.toLocaleString(
+        'pt-BR',
+        {
+          style:'currency',
+          currency:'BRL'
+        }
+      )
+    : '—';
+
+
+var economia =
+  valorOriginal > valorOferta
+    ? valorOriginal - valorOferta
+    : 0;
+
+
+document.getElementById(
+  'b_economia'
+).innerText =
+  economia > 0
+    ? economia.toLocaleString(
+        'pt-BR',
+        {
+          style:'currency',
+          currency:'BRL'
+        }
+      )
+    : '—';
 
   document.getElementById(
     'b_estoque'
@@ -1454,12 +1546,11 @@ function atualizarCriativo(){
     score;
 
 
-  document.getElementById(
-    'b_cta'
-  ).innerText =
-    String(
-      acao
-    ).toUpperCase();
+  // ROBOX - CTA público da campanha
+document.getElementById(
+  'b_cta'
+).innerText =
+  'QUERO ESTA OFERTA';
 
 
   // ==========================================================
