@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ROBOX Creative AI - Snapshot V3</title>
+  <title>ROBOX Creative AI - Snapshot V4 Percentuais</title>
 
   <style>
     *{
@@ -967,15 +967,41 @@
         return 0;
       }
 
-      const n = Number(
+      let s =
         String(v)
+          .trim()
           .replace(/\s/g,'')
-          .replace('R$','')
-          .replace(/\./g,'')
-          .replace(',','.')
-      );
+          .replace(/R\$/gi,'')
+          .replace(/%/g,'');
 
-      return Number.isFinite(n) ? n : 0;
+      // Formato brasileiro com milhar e decimal:
+      // 1.234,56 -> 1234.56
+      if(
+        s.includes('.') &&
+        s.includes(',')
+      ){
+        s =
+          s
+            .replace(/\./g,'')
+            .replace(',','.');
+      }
+      // Formato brasileiro decimal:
+      // 44,97 -> 44.97
+      else if(
+        s.includes(',')
+      ){
+        s =
+          s.replace(',','.');
+      }
+      // Somente ponto:
+      // 44.97 permanece 44.97
+      // 159.92 permanece 159.92
+
+      const n = Number(s);
+
+      return Number.isFinite(n)
+        ? n
+        : 0;
     }
 
 
