@@ -1,2427 +1,1611 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>ROBOX CREATIVE AI</title>
-
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
-<style>
-
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#eef3f8;
-  color:#0f172a;
-}
-
-header{
-  background:#111827;
-  color:white;
-  padding:24px 38px;
-}
-
-header h1{
-  margin:0;
-  font-size:28px;
-}
-
-header p{
-  margin:7px 0 0;
-  color:#94a3b8;
-  font-size:14px;
-}
-
-.container{
-  max-width:1280px;
-  margin:34px auto;
-  padding:0 20px;
-}
-
-.card{
-  background:white;
-  border-radius:24px;
-  padding:28px;
-  box-shadow:0 15px 40px rgba(15,23,42,.12);
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:390px 1fr;
-  gap:28px;
-}
-
-h2{
-  margin-top:0;
-}
-
-label{
-  display:block;
-  font-weight:bold;
-  margin-top:13px;
-  font-size:14px;
-}
-
-input{
-  width:100%;
-  padding:13px;
-  margin-top:7px;
-  border:1px solid #cbd5e1;
-  border-radius:10px;
-  font-size:15px;
-}
-
-button{
-  width:100%;
-  margin-top:14px;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:#2563eb;
-  color:white;
-  font-weight:bold;
-  font-size:14px;
-  cursor:pointer;
-}
-
-button:hover{
-  opacity:.93;
-}
-
-button:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-.btn-green{
-  background:#16a34a;
-}
-
-.btn-dark{
-  background:#111827;
-}
-
-.btn-gray{
-  background:#475569;
-}
-
-.preview{
-  background:#f8fafc;
-  border:1px solid #dbe3ef;
-  border-radius:18px;
-  padding:24px;
-}
-
-.success{
-  color:#059669;
-  font-weight:bold;
-  margin:0 0 12px;
-}
-
-.banner{
-  width:100%;
-  max-width:520px;
-  aspect-ratio:1/1;
-  background:#111827;
-  border-radius:14px;
-  padding:28px;
-  color:white;
-  position:relative;
-  overflow:hidden;
-}
-
-.banner-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:24px;
-  gap:14px;
-}
-
-.badge{
-  background:#16a34a;
-  color:white;
-  padding:9px 16px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:bold;
-}
-
-.brand{
-  color:#38bdf8;
-  font-size:12px;
-  font-weight:bold;
-  text-align:right;
-}
-
-.banner-content{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
-  align-items:center;
-}
-
-.product-box{
-  background:#1f2937;
-  border-radius:16px;
-  height:210px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  position:relative;
-}
-
-.product-box img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.placeholder{
-  font-size:50px;
-}
-
-.imagem-status{
-  margin-top:7px;
-  font-size:11px;
-  color:#64748b;
-  line-height:1.4;
-}
-
-.imagem-status.ok{
-  color:#047857;
-}
-
-.imagem-status.erro{
-  color:#b91c1c;
-}
-
-.offer h2{
-  font-size:36px;
-  line-height:34px;
-  margin:0 0 10px;
-}
-
-.offer .produto{
-  font-size:16px;
-  color:#cbd5e1;
-  margin-bottom:15px;
-}
-
-.price-box{
-  background:#ef4444;
-  border-radius:12px;
-  padding:14px 18px;
-  transform:rotate(-2deg);
-}
-
-.price-label{
-  font-size:11px;
-  font-weight:bold;
-}
-
-.price{
-  font-size:34px;
-  font-weight:900;
-}
-
-.metrics{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-top:24px;
-}
-
-.metric{
-  background:#263244;
-  border-radius:9px;
-  padding:10px;
-}
-
-.metric span{
-  display:block;
-  color:#94a3b8;
-  font-size:11px;
-}
-
-.metric b{
-  font-size:15px;
-}
-
-.cta{
-  position:absolute;
-  left:28px;
-  right:28px;
-  bottom:24px;
-  background:#16a34a;
-  color:white;
-  text-align:center;
-  padding:16px;
-  border-radius:12px;
-  font-weight:900;
-  font-size:18px;
-}
-
-
-/* ============================================================
-   CAMPANHA ROBOX
-   ============================================================ */
-
-.robox-panel{
-  margin-top:24px;
-  padding:22px;
-  border-radius:18px;
-  border:1px solid #bfdbfe;
-  background:#eff6ff;
-}
-
-.robox-panel h3{
-  margin:0 0 6px;
-  font-size:20px;
-}
-
-.robox-sub{
-  color:#475569;
-  font-size:13px;
-  line-height:1.5;
-  margin-bottom:18px;
-}
-
-.status-box{
-  padding:13px 15px;
-  border-radius:12px;
-  margin-bottom:16px;
-  font-size:14px;
-  font-weight:bold;
-}
-
-.status-ok{
-  background:#dcfce7;
-  color:#047857;
-}
-
-.status-warning{
-  background:#ffedd5;
-  color:#c2410c;
-}
-
-.info-box{
-  background:white;
-  border:1px solid #dbe3ef;
-  border-radius:12px;
-  padding:14px;
-  margin-top:10px;
-}
-
-.info-box span{
-  display:block;
-  font-size:11px;
-  text-transform:uppercase;
-  color:#64748b;
-  font-weight:bold;
-  margin-bottom:6px;
-}
-
-.info-box b{
-  font-size:14px;
-  word-break:break-word;
-}
-
-.actions-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:15px;
-}
-
-.actions-grid button{
-  margin:0;
-}
-
-.whatsapp-box{
-  margin-top:18px;
-  background:#ecfdf5;
-  border:1px solid #a7f3d0;
-  border-radius:15px;
-  padding:16px;
-}
-
-.whatsapp-box h4{
-  margin:0 0 10px;
-  color:#047857;
-}
-
-.small{
-  font-size:12px;
-  color:#64748b;
-  line-height:1.5;
-  margin-top:7px;
-}
-
-.separator{
-  height:1px;
-  background:#e2e8f0;
-  margin:22px 0;
-}
-
-@media(max-width:900px){
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .banner{
-    max-width:100%;
-  }
-
-  .actions-grid{
-    grid-template-columns:1fr;
-  }
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROBOX Creative AI - Snapshot V3</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+    }
+
+    :root{
+      --bg:#020617;
+      --panel:#0f172a;
+      --panel-2:#111827;
+      --line:#263244;
+      --text:#f8fafc;
+      --muted:#94a3b8;
+      --green:#22c55e;
+      --green-2:#16a34a;
+      --blue:#2563eb;
+      --purple:#7c3aed;
+      --amber:#f59e0b;
+      --red:#ef4444;
+      --white:#ffffff;
+    }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,.12), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(124,58,237,.12), transparent 28%),
+        var(--bg);
+      color:var(--text);
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+    }
+
+    button,
+    input{
+      font:inherit;
+    }
+
+    .app{
+      max-width:1480px;
+      margin:0 auto;
+      padding:28px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:22px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      font-size:22px;
+      background:linear-gradient(135deg,#22c55e,#16a34a);
+      box-shadow:0 12px 30px rgba(34,197,94,.25);
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:22px;
+      letter-spacing:.2px;
+    }
+
+    .brand p{
+      margin:3px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.6px;
+      background:rgba(34,197,94,.12);
+      color:#86efac;
+      border:1px solid rgba(34,197,94,.28);
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(380px, .9fr) minmax(520px, 1.1fr);
+      gap:22px;
+      align-items:start;
+    }
+
+    .panel{
+      background:rgba(15,23,42,.94);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:0 18px 48px rgba(0,0,0,.22);
+      overflow:hidden;
+    }
+
+    .panel-head{
+      padding:18px 20px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .panel-head h2{
+      margin:0;
+      font-size:16px;
+    }
+
+    .panel-body{
+      padding:20px;
+    }
+
+    .section-title{
+      margin:4px 0 12px;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.7px;
+      text-transform:uppercase;
+      color:#cbd5e1;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    label{
+      display:block;
+      margin-bottom:6px;
+      color:#cbd5e1;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    input{
+      width:100%;
+      min-height:44px;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid #334155;
+      background:#08111f;
+      color:#f8fafc;
+      outline:none;
+    }
+
+    input:focus{
+      border-color:#3b82f6;
+      box-shadow:0 0 0 3px rgba(59,130,246,.12);
+    }
+
+    .hint{
+      margin-top:5px;
+      color:#64748b;
+      font-size:11px;
+      line-height:1.45;
+    }
+
+    .internal-box{
+      margin-top:18px;
+      padding:16px;
+      border-radius:14px;
+      background:linear-gradient(180deg,rgba(37,99,235,.08),rgba(15,23,42,.24));
+      border:1px solid rgba(59,130,246,.22);
+    }
+
+    .internal-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+
+    .metric{
+      min-height:78px;
+      padding:12px;
+      border-radius:11px;
+      background:#08111f;
+      border:1px solid #243145;
+    }
+
+    .metric .k{
+      font-size:10px;
+      text-transform:uppercase;
+      color:#64748b;
+      font-weight:900;
+      letter-spacing:.5px;
+      margin-bottom:5px;
+    }
+
+    .metric .v{
+      font-size:17px;
+      font-weight:900;
+    }
+
+    .metric .v.green{
+      color:#86efac;
+    }
+
+    .metric .v.amber{
+      color:#fbbf24;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .btn{
+      border:0;
+      border-radius:10px;
+      padding:11px 14px;
+      font-weight:850;
+      cursor:pointer;
+      transition:.15s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-green{
+      background:var(--green);
+      color:#052e16;
+    }
+
+    .btn-blue{
+      background:var(--blue);
+      color:white;
+    }
+
+    .btn-purple{
+      background:var(--purple);
+      color:white;
+    }
+
+    .btn-dark{
+      background:#162033;
+      color:#f8fafc;
+      border:1px solid #334155;
+    }
+
+    .preview-shell{
+      padding:20px;
+    }
+
+    .preview-label{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .preview-label strong{
+      font-size:15px;
+    }
+
+    .preview-label span{
+      color:#94a3b8;
+      font-size:12px;
+    }
+
+    #criativo{
+      position:relative;
+      min-height:690px;
+      border-radius:22px;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(37,99,235,.28), transparent 28%),
+        radial-gradient(circle at 10% 100%, rgba(124,58,237,.24), transparent 28%),
+        linear-gradient(145deg,#0b1220,#030712 65%);
+      border:1px solid #263244;
+      box-shadow:0 20px 50px rgba(0,0,0,.32);
+      padding:34px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .creative-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .ai-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border-radius:999px;
+      padding:8px 11px;
+      background:rgba(34,197,94,.12);
+      border:1px solid rgba(34,197,94,.38);
+      color:#86efac;
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+    }
+
+    .creative-brand{
+      font-size:12px;
+      color:#94a3b8;
+      font-weight:800;
+      letter-spacing:.6px;
+    }
+
+    .creative-main{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:center;
+      margin:26px 0;
+    }
+
+    .creative-copy h2{
+      margin:0 0 8px;
+      font-size:44px;
+      line-height:.96;
+      letter-spacing:-1.8px;
+      max-width:560px;
+      text-transform:uppercase;
+    }
+
+    .creative-copy .product{
+      margin:18px 0 24px;
+      font-size:24px;
+      font-weight:800;
+      color:#e2e8f0;
+    }
+
+    .price-block{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:4px;
+    }
+
+    .old-label{
+      color:#94a3b8;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .old-price{
+      color:#94a3b8;
+      font-size:23px;
+      font-weight:800;
+      text-decoration:line-through;
+      text-decoration-thickness:2px;
+    }
+
+    .new-label{
+      margin-top:10px;
+      font-size:13px;
+      color:#bbf7d0;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+    }
+
+    .new-price{
+      margin-top:2px;
+      padding:8px 14px;
+      border-radius:12px;
+      font-size:46px;
+      line-height:1;
+      font-weight:950;
+      color:white;
+      background:linear-gradient(135deg,#ef4444,#dc2626);
+      box-shadow:0 12px 26px rgba(239,68,68,.22);
+    }
+
+    .economy{
+      margin-top:14px;
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:8px 11px;
+      border-radius:10px;
+      color:#dcfce7;
+      background:rgba(34,197,94,.12);
+      border:1px solid rgba(34,197,94,.3);
+      font-weight:850;
+      font-size:14px;
+    }
+
+    .creative-image-wrap{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:330px;
+    }
+
+    .creative-image{
+      max-width:100%;
+      max-height:340px;
+      object-fit:contain;
+      filter:drop-shadow(0 18px 25px rgba(0,0,0,.35));
+      display:none;
+    }
+
+    .image-placeholder{
+      width:250px;
+      height:250px;
+      border:1px dashed #475569;
+      border-radius:28px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:22px;
+      color:#64748b;
+      background:rgba(15,23,42,.28);
+    }
+
+    .image-placeholder .icon{
+      font-size:58px;
+      margin-bottom:8px;
+      display:block;
+    }
+
+    .creative-footer{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding-top:22px;
+      border-top:1px solid rgba(148,163,184,.18);
+    }
+
+    .public-note{
+      color:#94a3b8;
+      font-size:12px;
+      line-height:1.5;
+      max-width:380px;
+    }
+
+    .cta{
+      border-radius:13px;
+      padding:14px 22px;
+      background:linear-gradient(135deg,#22c55e,#16a34a);
+      color:#052e16;
+      font-weight:950;
+      font-size:15px;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      white-space:nowrap;
+    }
+
+    .tracking{
+      margin-top:18px;
+      padding:18px;
+      border-radius:14px;
+      border:1px solid rgba(34,197,94,.24);
+      background:rgba(34,197,94,.055);
+    }
+
+    .tracking h3{
+      margin:0 0 12px;
+      font-size:14px;
+    }
+
+    .tracking-row{
+      display:grid;
+      grid-template-columns:145px 1fr;
+      gap:10px;
+      padding:8px 0;
+      border-bottom:1px solid rgba(148,163,184,.1);
+      font-size:12px;
+    }
+
+    .tracking-row:last-child{
+      border-bottom:0;
+    }
+
+    .tracking-row .k{
+      color:#94a3b8;
+      font-weight:700;
+    }
+
+    .tracking-row .v{
+      color:#e2e8f0;
+      word-break:break-all;
+    }
+
+    .config{
+      margin-top:18px;
+      padding:16px;
+      border-radius:14px;
+      background:#08111f;
+      border:1px solid #263244;
+    }
+
+    .config-row{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+      align-items:end;
+    }
+
+    .whatsapp{
+      margin-top:16px;
+      padding-top:16px;
+      border-top:1px solid rgba(148,163,184,.12);
+    }
+
+    .success{
+      color:#86efac;
+    }
+
+    .warning{
+      color:#fbbf24;
+    }
+
+    @media (max-width:1050px){
+      .layout{
+        grid-template-columns:1fr;
+      }
+
+      .creative-main{
+        grid-template-columns:1fr;
+      }
+
+      .creative-image-wrap{
+        min-height:220px;
+      }
+
+      .internal-grid{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width:650px){
+      .app{
+        padding:14px;
+      }
+
+      .form-grid,
+      .internal-grid{
+        grid-template-columns:1fr;
+      }
+
+      .creative-copy h2{
+        font-size:34px;
+      }
+
+      .new-price{
+        font-size:38px;
+      }
+
+      .creative-footer{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .cta{
+        text-align:center;
+      }
+
+      .tracking-row{
+        grid-template-columns:1fr;
+      }
+
+      .config-row{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
 
-
 <body>
+  <div class="app">
 
-
-<header>
-
-  <h1>
-    🎨 ROBOX CREATIVE AI STUDIO
-  </h1>
-
-  <p>
-    Transforme oportunidades identificadas pelo Robox
-    em campanhas comerciais rastreáveis.
-  </p>
-
-</header>
-
-
-<div class="container">
-
-  <div class="card">
-
-    <div class="grid">
-
-
-      <!-- ====================================================
-           COLUNA ESQUERDA
-           ==================================================== -->
-
-      <div>
-
-        <h2>
-          Gerador de Campanhas
-        </h2>
-
-
-        <label>
-          Headline
-        </label>
-
-        <input
-          id="headline"
-          value="PROMOÇÃO ESPECIAL"
-        >
-
-
-        <label>
-          Produto
-        </label>
-
-        <input
-          id="produto"
-          value="CAMISETA BÁSICA"
-        >
-
-
-        <label>
-          Preço
-        </label>
-
-        <input
-          id="preco"
-          value="R$ 49,90"
-        >
-
-
-        <label>
-          Estoque
-        </label>
-
-        <input
-          id="estoque"
-          value="30"
-        >
-
-
-        <label>
-          Prioridade
-        </label>
-
-        <input
-          id="prioridade"
-          value="ALTA"
-        >
-
-
-        <label>
-          Ação
-        </label>
-
-        <input
-          id="acao"
-          value="CHAME NO WHATSAPP"
-        >
-
-
-        <label>
-          Score Robox
-        </label>
-
-        <input
-          id="score"
-          value="92"
-        >
-<label>
-  Desconto recomendado
-</label>
-
-<input
-  id="int_desconto_recomendado"
-  value="—"
-  readonly
->
-
-
-<label>
-  Margem atual
-</label>
-
-<input
-  id="int_margem_atual"
-  value="—"
-  readonly
->
-
-
-<label>
-  Margem após oferta
-</label>
-
-<input
-  id="int_margem_apos"
-  value="—"
-  readonly
->
-
-
-<label>
-  Limite máximo seguro
-</label>
-
-<input
-  id="int_limite_seguro"
-  value="—"
-  readonly
->
-
-        <label>
-          Imagem do Produto
-        </label>
-
-        <input
-          id="imagem"
-          placeholder="URL pública da imagem"
-        >
-
-
-        <div
-          id="imagemStatus"
-          class="imagem-status">
-
-          A imagem será carregada automaticamente.
-
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-mark">R</div>
+        <div>
+          <h1>ROBOX Creative AI</h1>
+          <p>Campanhas de Recovery Commerce com dados reais da decisão.</p>
         </div>
-
-
-        <button
-          onclick="atualizarCriativo()">
-
-          🔄 ATUALIZAR CRIATIVO
-
-        </button>
-
-
-        <button
-          class="btn-green"
-          onclick="baixarBanner()">
-
-          ⬇️ BAIXAR PNG
-
-        </button>
-
-
-        <div class="separator"></div>
-
-
-        <h3>
-          🔗 Integração com o Robox
-        </h3>
-
-
-        <label>
-          URL do Web App ROBOX
-        </label>
-
-        <input
-          id="roboxUrl"
-          placeholder="Cole aqui o endereço /exec do ROBOX"
-        >
-
-
-        <button
-          class="btn-dark"
-          onclick="salvarUrlRobox()">
-
-          💾 SALVAR URL DO ROBOX
-
-        </button>
-
-
-        <div class="small">
-
-          Você precisa informar essa URL apenas uma vez neste navegador.
-          É o endereço do ROBOX BAIRRO que termina em <b>/exec</b>.
-
-        </div>
-
       </div>
 
-
-      <!-- ====================================================
-           COLUNA DIREITA
-           ==================================================== -->
-
-      <div class="preview">
-
-        <h3>
-          Prévia da Campanha
-        </h3>
-
-
-        <p class="success">
-          ✅ Criativo pronto para visualização
-        </p>
-
-
-        <div
-          id="banner"
-          class="banner">
-
-          <div class="banner-top">
-
-            <div class="badge">
-              🤖 RECOMENDADO PELA IA
-            </div>
-
-            <div class="brand">
-              ROBOX CREATIVE AI
-            </div>
-
-          </div>
-
-
-          <div class="banner-content">
-
-            <div
-              class="product-box"
-              id="boxImagem">
-
-              <div class="placeholder">
-                👕
-              </div>
-
-            </div>
-
-
-            <div class="offer">
-
-              <h2 id="b_headline">
-                PROMOÇÃO<br>ESPECIAL
-              </h2>
-
-              <div
-                class="produto"
-                id="b_produto">
-
-                CAMISETA BÁSICA
-
-              </div>
-
-
-              <div class="price-box">
-
-                <div class="price-label">
-                  POR APENAS
-                </div>
-
-                <div
-                  class="price"
-                  id="b_preco">
-
-                  R$ 49,90
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="metrics">
-
-  <div class="metric">
-
-    <span>
-      De
-    </span>
-
-    <b
-      id="b_preco_original"
-      style="text-decoration:line-through; color:#94a3b8;">
-      R$ 0,00
-    </b>
-
-  </div>
-
-
-  <div class="metric">
-
-    <span>
-      Você economiza
-    </span>
-
-    <b
-      id="b_economia"
-      style="color:#22c55e;">
-      R$ 0,00
-    </b>
-
-  </div>
-
-</div>
-
-
-<!-- Mantidos ocultos para compatibilidade com o código atual -->
-<div style="display:none">
-
-  <b id="b_estoque">0</b>
-
-  <b id="b_prioridade">-</b>
-
-  <b id="b_score">0</b>
-
-</div>
-
-
-<div
-  class="cta"
-  id="b_cta">
-
-  QUERO ESTA OFERTA
-
-</div>
-
-        </div>
-
-
-        <!-- ==================================================
-             CAMPANHA ROBOX
-             ================================================== -->
-
-        <div
-          id="painelCampanha"
-          class="robox-panel">
-
-          <h3>
-            🛡️ Campanha Robox
-          </h3>
-
-
-          <div class="robox-sub">
-
-            Esta área mostra a identidade rastreável
-            da campanha criada pelo Robox.
-
-          </div>
-
-
-          <div
-            id="statusCampanha"
-            class="status-box status-warning">
-
-            ⚠️ Verificando campanha...
-
-          </div>
-
-
-          <div class="info-box">
-
-            <span>
-              ID da campanha
-            </span>
-
-            <b id="codigoCampanhaTela">
-              -
-            </b>
-
-          </div>
-
-
-          <div class="info-box">
-
-            <span>
-              Link rastreável da oferta
-            </span>
-
-            <b id="linkOfertaTela">
-              Configure a URL do Robox
-            </b>
-
-          </div>
-
-
-          <div class="actions-grid">
-
-            <button
-              id="btnCopiarLink"
-              onclick="copiarLinkOferta()">
-
-              📋 COPIAR OFERTA
-
-            </button>
-
-
-            <button
-              id="btnAbrirOferta"
-              class="btn-dark"
-              onclick="abrirOferta()">
-
-              👁 ABRIR OFERTA
-
-            </button>
-
-          </div>
-
-
-          <div class="whatsapp-box">
-
-            <h4>
-              💬 Enviar para o cliente
-            </h4>
-
-
-            <label>
-              WhatsApp do cliente (opcional)
-            </label>
-
-            <input
-              id="whatsappCliente"
-              placeholder="Ex.: 54999999999"
-            >
-
-
-            <button
-              class="btn-green"
-              onclick="enviarWhatsApp()">
-
-              💬 ENVIAR NO WHATSAPP
-
-            </button>
-
-
-            <div class="small">
-
-              Se deixar o número vazio, o WhatsApp abrirá
-              para você escolher o contato.
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
+      <div class="badge">🤖 Recomendado pela IA</div>
     </div>
 
+
+    <div class="layout">
+
+      <!-- =================================================== -->
+      <!-- PAINEL INTERNO DO LOJISTA -->
+      <!-- =================================================== -->
+      <section class="panel">
+
+        <div class="panel-head">
+          <h2>🧠 Informações internas</h2>
+          <span class="badge">Somente lojista</span>
+        </div>
+
+        <div class="panel-body">
+
+          <div class="section-title">
+            Dados do criativo
+          </div>
+
+          <div class="form-grid">
+
+            <div class="field full">
+              <label for="headline">Headline pública</label>
+              <input id="headline" value="OFERTA ESPECIAL">
+            </div>
+
+            <div class="field full">
+              <label for="produto">Produto</label>
+              <input id="produto">
+            </div>
+
+            <div class="field">
+              <label for="precoOriginal">Preço anterior</label>
+              <input id="precoOriginal">
+            </div>
+
+            <div class="field">
+              <label for="preco">Novo preço</label>
+              <input id="preco">
+            </div>
+
+            <div class="field">
+              <label for="estoque">Estoque</label>
+              <input id="estoque" type="number" min="0">
+            </div>
+
+            <div class="field">
+              <label for="imagem">Imagem do produto</label>
+              <input id="imagem" placeholder="URL da imagem">
+            </div>
+
+          </div>
+
+
+          <div class="internal-box">
+
+            <div class="section-title" style="margin-top:0">
+              Inteligência financeira ROBOX
+            </div>
+
+            <div class="internal-grid">
+
+              <div class="metric">
+                <div class="k">Desconto recomendado</div>
+                <div class="v green" id="intDesconto">0%</div>
+              </div>
+
+              <div class="metric">
+                <div class="k">Margem atual</div>
+                <div class="v" id="intMargemAtual">—</div>
+              </div>
+
+              <div class="metric">
+                <div class="k">Margem após oferta</div>
+                <div class="v green" id="intMargemApos">—</div>
+              </div>
+
+              <div class="metric">
+                <div class="k">Limite máximo seguro</div>
+                <div class="v amber" id="intLimite">—</div>
+              </div>
+
+              <div class="metric">
+                <div class="k">Prioridade</div>
+                <div class="v" id="intPrioridade">—</div>
+              </div>
+
+              <div class="metric">
+                <div class="k">Score ROBOX</div>
+                <div class="v" id="intScore">—</div>
+              </div>
+
+            </div>
+
+            <div class="hint" style="margin-top:12px">
+              Estes indicadores orientam o lojista e não aparecem no criativo público.
+            </div>
+
+          </div>
+
+
+          <div class="actions">
+            <button class="btn btn-blue" onclick="atualizarCriativo()">
+              🔄 Atualizar criativo
+            </button>
+
+            <button class="btn btn-purple" onclick="baixarPNG()">
+              ⬇️ Baixar PNG
+            </button>
+          </div>
+
+
+          <div class="config">
+
+            <div class="section-title" style="margin-top:0">
+              🔗 Integração com o ROBOX
+            </div>
+
+            <div class="config-row">
+
+              <div>
+                <label for="roboxUrl">URL do Web App ROBOX</label>
+                <input
+                  id="roboxUrl"
+                  placeholder="https://script.google.com/macros/s/.../exec">
+                <div class="hint">
+                  Informe apenas uma vez neste navegador. Deve terminar em /exec.
+                </div>
+              </div>
+
+              <button class="btn btn-dark" onclick="salvarUrlRobox()">
+                💾 Salvar URL
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- =================================================== -->
+      <!-- CRIATIVO PÚBLICO -->
+      <!-- =================================================== -->
+      <section class="panel">
+
+        <div class="preview-shell">
+
+          <div class="preview-label">
+            <strong>Prévia pública da campanha</strong>
+            <span>
+              Sem score, prioridade ou margem para o consumidor.
+            </span>
+          </div>
+
+
+          <div id="criativo">
+
+            <div class="creative-top">
+
+              <div class="ai-tag">
+                🤖 Oferta recomendada pela IA
+              </div>
+
+              <div class="creative-brand">
+                ROBOX CREATIVE AI
+              </div>
+
+            </div>
+
+
+            <div class="creative-main">
+
+              <div class="creative-copy">
+
+                <h2 id="pvHeadline">
+                  OFERTA ESPECIAL
+                </h2>
+
+                <div class="product" id="pvProduto">
+                  PRODUTO
+                </div>
+
+
+                <div class="price-block">
+
+                  <div class="old-label">
+                    De
+                  </div>
+
+                  <div class="old-price" id="pvPrecoOriginal">
+                    R$ 0,00
+                  </div>
+
+
+                  <div class="new-label">
+                    Por apenas
+                  </div>
+
+                  <div class="new-price" id="pvPreco">
+                    R$ 0,00
+                  </div>
+
+
+                  <div class="economy" id="pvEconomia">
+                    💰 Você economiza R$ 0,00
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div class="creative-image-wrap">
+
+                <img
+                  id="pvImagem"
+                  class="creative-image"
+                  alt="Imagem do produto">
+
+                <div
+                  id="pvPlaceholder"
+                  class="image-placeholder">
+
+                  <div>
+                    <span class="icon">🛍️</span>
+                    <strong>Produto em destaque</strong>
+                    <div style="margin-top:5px;font-size:12px">
+                      Adicione uma imagem para enriquecer o criativo.
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="creative-footer">
+
+              <div class="public-note">
+                Oferta especial gerada a partir de uma oportunidade identificada pelo ROBOX.
+              </div>
+
+              <div class="cta">
+                Quero esta oferta
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- CAMPANHA RASTREÁVEL -->
+          <!-- ================================================= -->
+          <div class="tracking">
+
+            <h3>
+              🛡️ Campanha ROBOX rastreável
+            </h3>
+
+            <div class="tracking-row">
+              <div class="k">
+                ID da campanha
+              </div>
+              <div class="v" id="trackingCodigo">
+                —
+              </div>
+            </div>
+
+            <div class="tracking-row">
+              <div class="k">
+                Link rastreável
+              </div>
+              <div class="v" id="trackingLink">
+                Informe a URL do ROBOX para gerar o link.
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn btn-dark" onclick="copiarOferta()">
+                📋 Copiar oferta
+              </button>
+
+              <button class="btn btn-dark" onclick="abrirOferta()">
+                👁 Abrir oferta
+              </button>
+            </div>
+
+
+            <div class="whatsapp">
+
+              <div class="section-title" style="margin-top:0">
+                💬 Enviar para o cliente
+              </div>
+
+              <label for="whatsappCliente">
+                WhatsApp do cliente (opcional)
+              </label>
+
+              <input
+                id="whatsappCliente"
+                placeholder="Ex.: 5554999999999">
+
+              <div class="actions">
+                <button class="btn btn-green" onclick="enviarWhatsApp()">
+                  💬 Enviar no WhatsApp
+                </button>
+              </div>
+
+              <div class="hint">
+                Se o número ficar vazio, o WhatsApp abrirá para você escolher o contato.
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </div>
   </div>
 
-</div>
 
+  <!-- html2canvas é usado somente para exportar o criativo em PNG -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
+  </script>
 
-<script>
+  <script>
+    // =========================================================
+    // UTILIDADES
+    // =========================================================
 
-
-// ============================================================
-// ESTADO
-// ============================================================
-
-let codigoCampanhaAtual = '';
-
-let linkOfertaAtual = '';
-
-let imagemAtualCarregada = '';
-
-
-// ============================================================
-// EXTRAIR ID GOOGLE DRIVE
-// ============================================================
-
-function extrairIdGoogleDrive(url){
-
-  if(
-    !url
-  ){
-
-    return '';
-
-  }
-
-
-  const texto =
-    String(
-      url
-    );
-
-
-  // ==========================================================
-  // ?id=XXXX
-  // ==========================================================
-
-  let match =
-    texto.match(
-      /[?&]id=([^&]+)/i
-    );
-
-
-  if(
-    match
-    &&
-    match[1]
-  ){
-
-    return decodeURIComponent(
-      match[1]
-    );
-
-  }
-
-
-  // ==========================================================
-  // /file/d/XXXX
-  // ==========================================================
-
-  match =
-    texto.match(
-      /\/file\/d\/([^/]+)/i
-    );
-
-
-  if(
-    match
-    &&
-    match[1]
-  ){
-
-    return decodeURIComponent(
-      match[1]
-    );
-
-  }
-
-
-  // ==========================================================
-  // /d/XXXX
-  // ==========================================================
-
-  match =
-    texto.match(
-      /\/d\/([^/=]+)(?:=|\/|$)/i
-    );
-
-
-  if(
-    match
-    &&
-    match[1]
-  ){
-
-    return decodeURIComponent(
-      match[1]
-    );
-
-  }
-
-
-  return '';
-
-}
-
-
-// ============================================================
-// NORMALIZAR URL DA IMAGEM
-// ============================================================
-
-function normalizarImagemProduto(url){
-
-  url =
-    String(
-      url
-      ||
-      ''
-    )
-    .trim();
-
-
-  if(
-    !url
-  ){
-
-    return '';
-
-  }
-
-
-  // ==========================================================
-  // GOOGLEUSERCONTENT JA PRONTO
-  // ==========================================================
-
-  if(
-    url.includes(
-      'googleusercontent.com'
-    )
-  ){
-
-    return url;
-
-  }
-
-
-  // ==========================================================
-  // GOOGLE DRIVE
-  // ==========================================================
-
-  if(
-    url.includes(
-      'drive.google.com'
-    )
-  ){
-
-    const id =
-      extrairIdGoogleDrive(
-        url
-      );
-
-
-    if(
-      id
-    ){
-
-      return (
-        'https://lh3.googleusercontent.com/d/'
-        +
-        id
-        +
-        '=w1000'
-      );
-
+    function qp(nome){
+      return new URLSearchParams(window.location.search).get(nome);
     }
 
-  }
+
+    function texto(v){
+      return String(v === null || v === undefined ? '' : v).trim();
+    }
 
 
-  // ==========================================================
-  // OUTRAS IMAGENS
-  // ==========================================================
-
-  return url;
-
-}
-
-
-// ============================================================
-// STATUS IMAGEM
-// ============================================================
-
-function atualizarStatusImagem(
-  mensagem,
-  tipo
-){
-
-  const status =
-    document.getElementById(
-      'imagemStatus'
-    );
-
-
-  status.className =
-    'imagem-status'
-    +
-    (
-      tipo
-      ?
-      ' ' + tipo
-      :
-      ''
-    );
-
-
-  status.textContent =
-    mensagem;
-
-}
-
-
-// ============================================================
-// CARREGAR IMAGEM COM FALLBACK
-// ============================================================
-
-function carregarImagemProduto(
-  urlOriginal
-){
-
-  const box =
-    document.getElementById(
-      'boxImagem'
-    );
-
-
-  const urlNormalizada =
-    normalizarImagemProduto(
-      urlOriginal
-    );
-
-
-  if(
-    !urlNormalizada
-  ){
-
-    box.innerHTML =
-      '<div class="placeholder">👕</div>';
-
-
-    imagemAtualCarregada =
-      '';
-
-
-    atualizarStatusImagem(
-      'Nenhuma imagem informada.',
-      ''
-    );
-
-
-    return;
-
-  }
-
-
-  atualizarStatusImagem(
-    'Carregando imagem...',
-    ''
-  );
-
-
-  box.innerHTML =
-    '';
-
-
-  const img =
-    document.createElement(
-      'img'
-    );
-
-
-  // ==========================================================
-  // NAO USAMOS crossOrigin AQUI.
-  // ISSO E IMPORTANTE PARA O GOOGLE DRIVE.
-  // ==========================================================
-
-  img.src =
-    urlNormalizada;
-
-
-  img.alt =
-    document.getElementById(
-      'produto'
-    ).value
-    ||
-    'Produto';
-
-
-  img.onload =
-    function(){
-
-      imagemAtualCarregada =
-        urlNormalizada;
-
-
-      atualizarStatusImagem(
-        '✅ Imagem carregada com sucesso.',
-        'ok'
-      );
-
-    };
-
-
-  img.onerror =
-    function(){
-
-      // ======================================================
-      // SE URL NORMALIZADA FALHAR,
-      // TENTAR URL ORIGINAL
-      // ======================================================
-
-      if(
-        urlOriginal
-        &&
-        urlOriginal !== urlNormalizada
-        &&
-        img.dataset.fallback !== '1'
-      ){
-
-        img.dataset.fallback =
-          '1';
-
-
-        img.src =
-          urlOriginal;
-
-
-        return;
-
+    function numero(v){
+      if(v === null || v === undefined || v === ''){
+        return 0;
       }
 
-
-      box.innerHTML =
-        '<div class="placeholder">👕</div>';
-
-
-      imagemAtualCarregada =
-        '';
-
-
-      atualizarStatusImagem(
-        '⚠️ Não foi possível carregar a imagem.',
-        'erro'
-      );
-
-    };
-
-
-  box.appendChild(
-    img
-  );
-
-}
-
-
-// ============================================================
-// INICIAR
-// ============================================================
-
-function carregarParametros(){
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-
-  const campos = [
-
-    'headline',
-
-    'produto',
-
-    'preco',
-
-    'estoque',
-
-    'prioridade',
-
-    'acao',
-
-    'score',
-
-    'imagem'
-
-  ];
-
-
-  campos.forEach(
-
-    function(campo){
-
-      const valor =
-        params.get(
-          campo
-        );
-
-
-      if(
-        valor !== null
-        &&
-        document.getElementById(
-          campo
-        )
-      ){
-
-        document.getElementById(
-          campo
-        ).value =
-          valor;
-
-      }
-
-    }
-
-  );
-
-
-  codigoCampanhaAtual =
-    String(
-
-      params.get(
-        'codigoCampanha'
-      )
-
-      ||
-
-      params.get(
-        'rbx'
-      )
-
-      ||
-
-      params.get(
-        'campanha'
-      )
-
-      ||
-
-      ''
-
-    );
-
-
-  const webAppUrlRecebida =
-    String(
-      params.get(
-        'webAppUrl'
-      )
-      ||
-      ''
-    );
-
-
-  if(
-    webAppUrlRecebida
-  ){
-
-    document.getElementById(
-      'roboxUrl'
-    ).value =
-      webAppUrlRecebida;
-
-
-    localStorage.setItem(
-      'roboxWebAppUrl',
-      webAppUrlRecebida
-    );
-
-  }
-
-  else{
-
-    const salva =
-      localStorage.getItem(
-        'roboxWebAppUrl'
-      )
-      ||
-      '';
-
-
-    document.getElementById(
-      'roboxUrl'
-    ).value =
-      salva;
-
-  }
-
-
-  atualizarCriativo();
-
-  atualizarPainelCampanha();
-
-}
-
-
-// ============================================================
-// ATUALIZAR CRIATIVO
-// ============================================================
-
-function atualizarCriativo(){
-
-  const headline =
-    document.getElementById(
-      'headline'
-    ).value
-    ||
-    'PROMOÇÃO ESPECIAL';
-
-
-  const produto =
-    document.getElementById(
-      'produto'
-    ).value
-    ||
-    'Produto';
-
-
-  const preco =
-    document.getElementById(
-      'preco'
-    ).value
-    ||
-    'R$ 0,00';
-
-
-  const estoque =
-    document.getElementById(
-      'estoque'
-    ).value
-    ||
-    '0';
-
-
-  const prioridade =
-    document.getElementById(
-      'prioridade'
-    ).value
-    ||
-    'NORMAL';
-
-
-  const score =
-    document.getElementById(
-      'score'
-    ).value
-    ||
-    '0';
-
-
-  const imagem =
-    document.getElementById(
-      'imagem'
-    ).value
-    ||
-    '';
-
-
-  const acao =
-    document.getElementById(
-      'acao'
-    ).value
-    ||
-    'CHAME NO WHATSAPP';
-
-
-  // ROBOX - linguagem pública da campanha
-var headlinePublica =
-  String(headline || '')
-    .trim()
-    .toUpperCase() === 'RECUPERE ESTE PRODUTO'
-      ? 'OFERTA ESPECIAL'
-      : String(headline || '').trim();
-
-if(!headlinePublica){
-  headlinePublica = 'OFERTA ESPECIAL';
-}
-
-document.getElementById(
-  'b_headline'
-).innerHTML =
-  quebrarHeadline(
-    headlinePublica
-  );
-
-
-  document.getElementById(
-    'b_produto'
-  ).innerText =
-    produto;
-
-
-  document.getElementById(
-    'b_preco'
-  ).innerText =
-    preco;
-// =============================================
-// ROBOX - PREÇO ANTERIOR E ECONOMIA
-// Criativo público
-// =============================================
-
-var paramsOferta =
-  new URLSearchParams(
-    window.location.search
-  );
-
-var precoOriginalTexto =
-  paramsOferta.get(
-    'precoOriginal'
-  ) || '';
-
-var converterMoedaRobox =
-  function(valor){
-
-    var texto =
-      String(
-        valor || ''
-      )
-        .replace('R$','')
-        .trim()
-        .replace(/\./g,'')
-        .replace(',','.');
-
-    var numero =
-      Number(texto);
-
-    return isNaN(numero)
-      ? 0
-      : numero;
-  };
-
-var valorOriginal =
-  converterMoedaRobox(
-    precoOriginalTexto
-  );
-
-var valorOferta =
-  converterMoedaRobox(
-    preco
-  );
-
-
-document.getElementById(
-  'b_preco_original'
-).innerText =
-  valorOriginal > 0
-    ? valorOriginal.toLocaleString(
-        'pt-BR',
-        {
-          style:'currency',
-          currency:'BRL'
-        }
-      )
-    : '—';
-
-
-var economia =
-  valorOriginal > valorOferta
-    ? valorOriginal - valorOferta
-    : 0;
-
-
-document.getElementById(
-  'b_economia'
-).innerText =
-  economia > 0
-    ? economia.toLocaleString(
-        'pt-BR',
-        {
-          style:'currency',
-          currency:'BRL'
-        }
-      )
-    : '—';
-// =============================================
-// ROBOX - INDICADORES FINANCEIROS INTERNOS
-// =============================================
-
-var formatarPercentualRobox =
-  function(valor){
-
-    if(
-      valor === null ||
-      valor === undefined ||
-      valor === ''
-    ){
-      return '—';
-    }
-
-    var n =
-      Number(
-        String(valor)
+      const n = Number(
+        String(v)
+          .replace(/\s/g,'')
+          .replace('R$','')
+          .replace(/\./g,'')
           .replace(',','.')
       );
 
-    if(isNaN(n)){
-      return '—';
-    }
-
-    return n
-      .toFixed(2)
-      .replace('.',',') + '%';
-  };
-
-
-var descontoInterno =
-  paramsOferta.get('descontoRecomendado') ||
-  paramsOferta.get('desconto');
-
-var margemAtualInterna =
-  paramsOferta.get('margemAtual');
-
-var margemAposInterna =
-  paramsOferta.get('margemApos');
-
-var limiteSeguroInterno =
-  paramsOferta.get('limiteSeguro');
-
-
-document.getElementById(
-  'int_desconto_recomendado'
-).value =
-  formatarPercentualRobox(
-    descontoInterno
-  );
-
-
-document.getElementById(
-  'int_margem_atual'
-).value =
-  formatarPercentualRobox(
-    margemAtualInterna
-  );
-
-
-document.getElementById(
-  'int_margem_apos'
-).value =
-  formatarPercentualRobox(
-    margemAposInterna
-  );
-
-
-document.getElementById(
-  'int_limite_seguro'
-).value =
-  formatarPercentualRobox(
-    limiteSeguroInterno
-  );
-  document.getElementById(
-    'b_estoque'
-  ).innerText =
-    estoque;
-
-
-  document.getElementById(
-    'b_prioridade'
-  ).innerText =
-    prioridade;
-
-
-  document.getElementById(
-    'b_score'
-  ).innerText =
-    score;
-
-
-  // ROBOX - CTA público da campanha
-document.getElementById(
-  'b_cta'
-).innerText =
-  'QUERO ESTA OFERTA';
-
-
-  // ==========================================================
-  // NOVO CARREGAMENTO DE IMAGEM
-  // ==========================================================
-
-  carregarImagemProduto(
-    imagem
-  );
-
-
-  atualizarPainelCampanha();
-
-}
-
-
-// ============================================================
-// QUEBRAR HEADLINE
-// ============================================================
-
-function quebrarHeadline(texto){
-
-  const palavras =
-    String(
-      texto
-    )
-    .trim()
-    .split(
-      /\s+/
-    );
-
-
-  if(
-    palavras.length <= 1
-  ){
-
-    return texto;
-
-  }
-
-
-  const meio =
-    Math.ceil(
-      palavras.length / 2
-    );
-
-
-  return (
-
-    palavras
-      .slice(
-        0,
-        meio
-      )
-      .join(
-        ' '
-      )
-
-    +
-
-    '<br>'
-
-    +
-
-    palavras
-      .slice(
-        meio
-      )
-      .join(
-        ' '
-      )
-
-  );
-
-}
-
-
-// ============================================================
-// SALVAR URL ROBOX
-// ============================================================
-
-function salvarUrlRobox(){
-
-  let url =
-    String(
-      document.getElementById(
-        'roboxUrl'
-      ).value
-      ||
-      ''
-    )
-    .trim();
-
-
-  if(
-    !url
-  ){
-
-    alert(
-      'Informe o endereço do Web App ROBOX.'
-    );
-
-    return;
-
-  }
-
-
-  if(
-    !url.includes(
-      '/exec'
-    )
-  ){
-
-    alert(
-      'Use o endereço publicado do ROBOX que termina em /exec.'
-    );
-
-    return;
-
-  }
-
-
-  url =
-    url.split(
-      '?'
-    )[0];
-
-
-  document.getElementById(
-    'roboxUrl'
-  ).value =
-    url;
-
-
-  localStorage.setItem(
-    'roboxWebAppUrl',
-    url
-  );
-
-
-  atualizarPainelCampanha();
-
-
-  alert(
-    'URL do ROBOX salva com sucesso.'
-  );
-
-}
-
-
-// ============================================================
-// GERAR LINK RASTREAVEL
-// ============================================================
-
-function gerarLinkOferta(){
-
-  const base =
-    String(
-      document.getElementById(
-        'roboxUrl'
-      ).value
-      ||
-      ''
-    )
-    .trim();
-
-
-  if(
-    !base
-    ||
-    !codigoCampanhaAtual
-  ){
-
-    return '';
-
-  }
-
-
-  try{
-
-    const url =
-      new URL(
-        base
-      );
-
-
-    url.searchParams.set(
-      'rbx',
-      codigoCampanhaAtual
-    );
-
-
-    url.searchParams.set(
-      'origem',
-      'LINK'
-    );
-
-
-    return url.toString();
-
-  }
-
-  catch(error){
-
-    return '';
-
-  }
-
-}
-
-
-// ============================================================
-// ATUALIZAR PAINEL
-// ============================================================
-
-function atualizarPainelCampanha(){
-
-  const status =
-    document.getElementById(
-      'statusCampanha'
-    );
-
-
-  const codigoTela =
-    document.getElementById(
-      'codigoCampanhaTela'
-    );
-
-
-  const linkTela =
-    document.getElementById(
-      'linkOfertaTela'
-    );
-
-
-  codigoTela.innerText =
-    codigoCampanhaAtual
-    ||
-    'SEM ID ROBOX';
-
-
-  linkOfertaAtual =
-    gerarLinkOferta();
-
-
-  if(
-    codigoCampanhaAtual
-    &&
-    linkOfertaAtual
-  ){
-
-    status.className =
-      'status-box status-ok';
-
-
-    status.innerText =
-      '✅ CAMPANHA ROBOX RASTREÁVEL';
-
-
-    linkTela.innerText =
-      linkOfertaAtual;
-
-
-    habilitarAcoes(
-      true
-    );
-
-
-    return;
-
-  }
-
-
-  if(
-    codigoCampanhaAtual
-    &&
-    !linkOfertaAtual
-  ){
-
-    status.className =
-      'status-box status-warning';
-
-
-    status.innerText =
-      '⚠️ Campanha identificada. Falta informar a URL do Web App ROBOX.';
-
-
-    linkTela.innerText =
-      'Informe e salve o endereço /exec do ROBOX.';
-
-
-    habilitarAcoes(
-      false
-    );
-
-
-    return;
-
-  }
-
-
-  status.className =
-    'status-box status-warning';
-
-
-  status.innerText =
-    '⚠️ Este criativo não recebeu um ID de campanha Robox.';
-
-
-  linkTela.innerText =
-    'Abra o Creative AI pelo botão Criar Campanha do ROBOX.';
-
-
-  habilitarAcoes(
-    false
-  );
-
-}
-
-
-// ============================================================
-// HABILITAR ACOES
-// ============================================================
-
-function habilitarAcoes(
-  ativo
-){
-
-  document.getElementById(
-    'btnCopiarLink'
-  ).disabled =
-    !ativo;
-
-
-  document.getElementById(
-    'btnAbrirOferta'
-  ).disabled =
-    !ativo;
-
-}
-
-
-// ============================================================
-// COPIAR LINK
-// ============================================================
-
-async function copiarLinkOferta(){
-
-  if(
-    !linkOfertaAtual
-  ){
-
-    alert(
-      'O link rastreável ainda não está disponível.'
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await navigator.clipboard.writeText(
-      linkOfertaAtual
-    );
-
-
-    alert(
-      'Link da oferta copiado.'
-    );
-
-  }
-
-  catch(error){
-
-    prompt(
-      'Copie o link abaixo:',
-      linkOfertaAtual
-    );
-
-  }
-
-}
-
-
-// ============================================================
-// ABRIR OFERTA
-// ============================================================
-
-function abrirOferta(){
-
-  if(
-    !linkOfertaAtual
-  ){
-
-    alert(
-      'Configure o link rastreável primeiro.'
-    );
-
-    return;
-
-  }
-
-
-  window.open(
-    linkOfertaAtual,
-    '_blank'
-  );
-
-}
-
-
-// ============================================================
-// MENSAGEM COMERCIAL
-// ============================================================
-
-function montarMensagemCliente(){
-
-  const produto =
-    document.getElementById(
-      'produto'
-    ).value
-    ||
-    'Produto';
-
-
-  const preco =
-    document.getElementById(
-      'preco'
-    ).value
-    ||
-    '';
-
-
-  const headline =
-    document.getElementById(
-      'headline'
-    ).value
-    ||
-    'Oferta especial';
-
-
-  return (
-
-    '🔥 '
-    +
-    headline
-    +
-    '\n\n'
-
-    +
-
-    'Produto: '
-    +
-    produto
-    +
-    '\n'
-
-    +
-
-    (
-      preco
-      ?
-      'Preço: ' + preco + '\n'
-      :
-      ''
-    )
-
-    +
-
-    '\nConfira a oferta:\n'
-
-    +
-
-    linkOfertaAtual
-
-  );
-
-}
-
-
-// ============================================================
-// WHATSAPP
-// ============================================================
-
-function enviarWhatsApp(){
-
-  if(
-    !linkOfertaAtual
-  ){
-
-    alert(
-      'O link rastreável da oferta ainda não está disponível.'
-    );
-
-    return;
-
-  }
-
-
-  const mensagem =
-    montarMensagemCliente();
-
-
-  let numero =
-    String(
-      document.getElementById(
-        'whatsappCliente'
-      ).value
-      ||
-      ''
-    );
-
-
-  numero =
-    numero.replace(
-      /\D/g,
-      ''
-    );
-
-
-  let url =
-    'https://wa.me/';
-
-
-  if(
-    numero
-  ){
-
-    if(
-      numero.length === 10
-      ||
-      numero.length === 11
-    ){
-
-      numero =
-        '55'
-        +
-        numero;
-
+      return Number.isFinite(n) ? n : 0;
     }
 
 
-    url +=
-      numero;
-
-  }
-
-
-  url +=
-    '?text='
-    +
-    encodeURIComponent(
-      mensagem
-    );
-
-
-  window.open(
-    url,
-    '_blank'
-  );
-
-}
-
-
-// ============================================================
-// BAIXAR PNG
-// ============================================================
-
-async function baixarBanner(){
-
-  try{
-
-    const banner =
-      document.getElementById(
-        'banner'
-      );
-
-
-    const canvas =
-      await html2canvas(
-        banner,
+    function moeda(v){
+      return Number(v || 0).toLocaleString(
+        'pt-BR',
         {
-
-          scale:
-            2,
-
-          useCORS:
-            true,
-
-          allowTaint:
-            true,
-
-          backgroundColor:
-            null
-
+          style:'currency',
+          currency:'BRL'
         }
       );
+    }
 
 
-    const link =
-      document.createElement(
-        'a'
-      );
+    function pct(v){
+      if(v === null || v === undefined || v === ''){
+        return '—';
+      }
+
+      return numero(v)
+        .toFixed(2)
+        .replace('.',',') + '%';
+    }
 
 
-    link.download =
-      codigoCampanhaAtual
-      ?
-      codigoCampanhaAtual
-      +
-      '.png'
-      :
-      'robox-campanha.png';
+    function precoParam(v){
+      const n = numero(v);
+      return n > 0 ? moeda(n) : '';
+    }
 
 
-    link.href =
-      canvas.toDataURL(
-        'image/png'
-      );
+    // =========================================================
+    // ESTADO DA CAMPANHA
+    // =========================================================
+
+    const estado = {
+      codigoCampanha:'',
+      desconto:0,
+      prioridade:'',
+      acao:'',
+      score:0,
+      margemAtual:null,
+      margemApos:null,
+      limiteSeguro:null,
+      diasParado:0,
+      minimo:0
+    };
 
 
-    link.click();
-
-  }
-
-  catch(error){
-
-    console.error(
-      error
-    );
+    const ROBOX_WEBAPP_FALLBACK =
+      'https://script.google.com/macros/s/AKfycbzThlddSeA1WpHvGZMh4PUewi4I1ImQm5zBehKFpnxrS3wRxs5y8BwaLpOCHZJ6c14/exec';
 
 
-    alert(
-      'A prévia está correta, mas o navegador não conseguiu gerar o PNG com a imagem externa. Tente novamente ou use uma imagem hospedada fora do Google Drive.'
-    );
+    // =========================================================
+    // CARREGAR DADOS DA URL
+    // =========================================================
 
-  }
+    function carregarParametros(){
 
-}
+      const headlineUrl =
+        texto(qp('headline'));
 
-
-// ============================================================
-// ATUALIZACAO AUTOMATICA
-// ============================================================
-
-function ativarAtualizacaoAutomatica(){
-
-  const campos = [
-
-    'headline',
-
-    'produto',
-
-    'preco',
-
-    'estoque',
-
-    'prioridade',
-
-    'acao',
-
-    'score'
-
-  ];
+      const headlinePublica =
+        headlineUrl &&
+        headlineUrl.toUpperCase() !== 'RECUPERE ESTE PRODUTO'
+          ? headlineUrl
+          : 'OFERTA ESPECIAL';
 
 
-  campos.forEach(
+      document.getElementById('headline').value =
+        headlinePublica;
 
-    function(id){
+      document.getElementById('produto').value =
+        texto(qp('produto'));
 
-      const elemento =
-        document.getElementById(
-          id
+      document.getElementById('preco').value =
+        precoParam(qp('preco'));
+
+      document.getElementById('precoOriginal').value =
+        precoParam(qp('precoOriginal'));
+
+      document.getElementById('estoque').value =
+        texto(qp('estoque'));
+
+      document.getElementById('imagem').value =
+        texto(qp('imagem'));
+
+
+      estado.codigoCampanha =
+        texto(qp('codigoCampanha'));
+
+      estado.desconto =
+        numero(
+          qp('descontoRecomendado') ||
+          qp('desconto')
         );
+
+      estado.prioridade =
+        texto(qp('prioridade'));
+
+      estado.acao =
+        texto(qp('acao'));
+
+      const scoreRecebido =
+        qp('scoreDecision') ||
+        qp('score');
+
+      estado.score =
+        scoreRecebido === null ||
+        scoreRecebido === undefined ||
+        String(scoreRecebido).trim() === ''
+          ? 0
+          : numero(scoreRecebido);
+
+      estado.margemAtual =
+        qp('margemAtual');
+
+      estado.margemApos =
+        qp('margemApos');
+
+      estado.limiteSeguro =
+        qp('limiteSeguro');
+
+      estado.diasParado =
+        numero(qp('diasParado'));
+
+      estado.minimo =
+        numero(qp('minimo'));
+
+
+      document.getElementById('intDesconto').textContent =
+        pct(estado.desconto);
+
+      document.getElementById('intMargemAtual').textContent =
+        pct(estado.margemAtual);
+
+      document.getElementById('intMargemApos').textContent =
+        pct(estado.margemApos);
+
+      document.getElementById('intLimite').textContent =
+        pct(estado.limiteSeguro);
+
+      document.getElementById('intPrioridade').textContent =
+        estado.prioridade || '—';
+
+      document.getElementById('intScore').textContent =
+        estado.score > 0
+          ? estado.score + '/100'
+          : '—';
+
+
+      document.getElementById('trackingCodigo').textContent =
+        estado.codigoCampanha || '—';
+
+
+      const roboxUrlParam =
+        normalizarUrlRobox(
+          texto(qp('roboxUrl'))
+        );
+
+      const salva =
+        localStorage.getItem('ROBOX_WEBAPP_URL') || '';
+
+      const roboxUrlFinal =
+        /\/exec$/i.test(roboxUrlParam)
+          ? roboxUrlParam
+          : (
+              /\/exec$/i.test(salva)
+                ? salva
+                : ROBOX_WEBAPP_FALLBACK
+            );
+
+      document.getElementById('roboxUrl').value =
+        roboxUrlFinal;
+
+      if(/\/exec$/i.test(roboxUrlFinal)){
+        localStorage.setItem(
+          'ROBOX_WEBAPP_URL',
+          roboxUrlFinal
+        );
+      }
+
+
+      atualizarCriativo();
+      atualizarTracking();
+    }
+
+
+    // =========================================================
+    // ATUALIZAR CRIATIVO PÚBLICO
+    // =========================================================
+
+    function atualizarCriativo(){
+
+      const headline =
+        texto(
+          document.getElementById('headline').value
+        ) || 'OFERTA ESPECIAL';
+
+      const produto =
+        texto(
+          document.getElementById('produto').value
+        ) || 'PRODUTO';
+
+      const precoAtual =
+        numero(
+          document.getElementById('preco').value
+        );
+
+      const precoOriginal =
+        numero(
+          document.getElementById('precoOriginal').value
+        );
+
+      const imagem =
+        texto(
+          document.getElementById('imagem').value
+        );
+
+
+      document.getElementById('pvHeadline').textContent =
+        headline;
+
+      document.getElementById('pvProduto').textContent =
+        produto;
+
+      document.getElementById('pvPreco').textContent =
+        moeda(precoAtual);
+
+
+      const old =
+        document.getElementById('pvPrecoOriginal');
+
+      const economy =
+        document.getElementById('pvEconomia');
 
 
       if(
-        elemento
+        precoOriginal > 0 &&
+        precoAtual > 0 &&
+        precoOriginal > precoAtual
       ){
 
-        elemento.addEventListener(
-          'input',
-          atualizarCriativo
-        );
+        old.textContent =
+          moeda(precoOriginal);
 
+        old.style.display =
+          'block';
+
+        economy.textContent =
+          '💰 Você economiza ' +
+          moeda(
+            precoOriginal -
+            precoAtual
+          );
+
+        economy.style.display =
+          'inline-flex';
+
+      }else{
+
+        old.style.display =
+          'none';
+
+        economy.style.display =
+          'none';
       }
 
+
+      const img =
+        document.getElementById('pvImagem');
+
+      const placeholder =
+        document.getElementById('pvPlaceholder');
+
+
+      if(imagem){
+
+        img.onload = function(){
+          img.style.display = 'block';
+          placeholder.style.display = 'none';
+        };
+
+        img.onerror = function(){
+          img.style.display = 'none';
+          placeholder.style.display = 'grid';
+        };
+
+        img.src = imagem;
+
+      }else{
+
+        img.removeAttribute('src');
+        img.style.display = 'none';
+        placeholder.style.display = 'grid';
+      }
+
+
+      atualizarTracking();
     }
 
-  );
+
+    // =========================================================
+    // URL ROBOX + TRACKING
+    // =========================================================
+
+    function normalizarUrlRobox(url){
+
+      url =
+        texto(url)
+          .replace(/\/+$/,'');
+
+      return url;
+    }
 
 
-  // ==========================================================
-  // IMAGEM TEM PEQUENO ATRASO PARA EVITAR RECARREGAR
-  // A CADA LETRA DIGITADA
-  // ==========================================================
+    function salvarUrlRobox(){
 
-  const campoImagem =
-    document.getElementById(
-      'imagem'
-    );
+      const url =
+        normalizarUrlRobox(
+          document.getElementById('roboxUrl').value
+        );
+
+      if(!url){
+
+        alert(
+          'Informe a URL do Web App ROBOX.'
+        );
+
+        return;
+      }
 
 
-  let timerImagem =
-    null;
+      if(
+        !/\/exec$/i.test(url)
+      ){
+
+        alert(
+          'A URL do ROBOX deve terminar em /exec.'
+        );
+
+        return;
+      }
 
 
-  campoImagem.addEventListener(
-    'input',
-    function(){
+      localStorage.setItem(
+        'ROBOX_WEBAPP_URL',
+        url
+      );
 
-      clearTimeout(
-        timerImagem
+      document.getElementById('roboxUrl').value =
+        url;
+
+      atualizarTracking();
+
+      alert(
+        'URL do ROBOX salva neste navegador.'
+      );
+    }
+
+
+    function linkRastreavel(){
+
+      const base =
+        normalizarUrlRobox(
+          document.getElementById('roboxUrl').value ||
+          localStorage.getItem('ROBOX_WEBAPP_URL') ||
+          ''
+        );
+
+      if(
+        !base ||
+        !estado.codigoCampanha
+      ){
+        return '';
+      }
+
+
+      return (
+        base +
+        '?rbx=' +
+        encodeURIComponent(
+          estado.codigoCampanha
+        ) +
+        '&origem=LINK'
+      );
+    }
+
+
+    function atualizarTracking(){
+
+      const link =
+        linkRastreavel();
+
+      document.getElementById('trackingLink').textContent =
+        link ||
+        'Informe a URL do ROBOX para gerar o link rastreável.';
+    }
+
+
+    // =========================================================
+    // MENSAGEM PÚBLICA
+    // =========================================================
+
+    function mensagemOferta(){
+
+      const produto =
+        texto(
+          document.getElementById('produto').value
+        ) || 'Produto';
+
+      const precoAtual =
+        numero(
+          document.getElementById('preco').value
+        );
+
+      const precoOriginal =
+        numero(
+          document.getElementById('precoOriginal').value
+        );
+
+      const link =
+        linkRastreavel();
+
+
+      const linhas = [
+        '✨ OFERTA ESPECIAL',
+        '',
+        produto
+      ];
+
+
+      if(
+        precoOriginal > precoAtual &&
+        precoAtual > 0
+      ){
+
+        linhas.push(
+          'De ' +
+          moeda(precoOriginal) +
+          ' por ' +
+          moeda(precoAtual)
+        );
+
+        linhas.push(
+          'Você economiza ' +
+          moeda(
+            precoOriginal -
+            precoAtual
+          )
+        );
+
+      }else{
+
+        linhas.push(
+          'Por ' +
+          moeda(precoAtual)
+        );
+      }
+
+
+      linhas.push(
+        '',
+        'Quero esta oferta!'
       );
 
 
-      timerImagem =
-        setTimeout(
-          function(){
+      if(link){
 
-            carregarImagemProduto(
-              campoImagem.value
-            );
+        linhas.push(
+          '',
+          link
+        );
+      }
 
-          },
-          500
+
+      return linhas.join('\n');
+    }
+
+
+    async function copiarOferta(){
+
+      try{
+
+        await navigator.clipboard.writeText(
+          mensagemOferta()
         );
 
+        alert(
+          'Oferta copiada.'
+        );
+
+      }catch(e){
+
+        alert(
+          'Não foi possível copiar automaticamente.'
+        );
+      }
     }
-  );
-
-}
 
 
-// ============================================================
-// INICIALIZAR
-// ============================================================
+    function abrirOferta(){
 
-document.addEventListener(
+      const link =
+        linkRastreavel();
 
-  'DOMContentLoaded',
+      if(!link){
 
-  function(){
+        alert(
+          'Informe e salve a URL do ROBOX antes de abrir a oferta.'
+        );
 
-    ativarAtualizacaoAutomatica();
+        return;
+      }
 
-    carregarParametros();
 
-  }
+      window.open(
+        link,
+        '_blank'
+      );
+    }
 
-);
 
-</script>
+    function enviarWhatsApp(){
 
+      const numeroCliente =
+        texto(
+          document.getElementById('whatsappCliente').value
+        )
+          .replace(/\D/g,'');
+
+      const mensagem =
+        mensagemOferta();
+
+
+      const url =
+        numeroCliente
+          ? (
+              'https://wa.me/' +
+              numeroCliente +
+              '?text=' +
+              encodeURIComponent(mensagem)
+            )
+          : (
+              'https://wa.me/?text=' +
+              encodeURIComponent(mensagem)
+            );
+
+
+      window.open(
+        url,
+        '_blank'
+      );
+    }
+
+
+    // =========================================================
+    // EXPORTAR PNG
+    // =========================================================
+
+    async function baixarPNG(){
+
+      const alvo =
+        document.getElementById('criativo');
+
+
+      if(
+        typeof html2canvas !==
+        'function'
+      ){
+
+        alert(
+          'O recurso de exportação ainda não foi carregado. Atualize a página e tente novamente.'
+        );
+
+        return;
+      }
+
+
+      try{
+
+        const canvas =
+          await html2canvas(
+            alvo,
+            {
+              scale:2,
+              backgroundColor:'#030712',
+              useCORS:true
+            }
+          );
+
+
+        const link =
+          document.createElement('a');
+
+        const nome =
+          texto(
+            document.getElementById('produto').value
+          )
+            .replace(/[^\w\-]+/g,'-')
+            .replace(/^-+|-+$/g,'')
+            .toLowerCase() ||
+          'campanha-robox';
+
+
+        link.download =
+          nome + '.png';
+
+        link.href =
+          canvas.toDataURL('image/png');
+
+        link.click();
+
+      }catch(e){
+
+        alert(
+          'Não foi possível gerar o PNG. Se a imagem do produto vier de outro domínio, tente baixar sem imagem ou use uma imagem com acesso público.'
+        );
+      }
+    }
+
+
+    // =========================================================
+    // INICIALIZAÇÃO
+    // =========================================================
+
+    window.addEventListener(
+      'DOMContentLoaded',
+      carregarParametros
+    );
+  </script>
 </body>
-
 </html>
